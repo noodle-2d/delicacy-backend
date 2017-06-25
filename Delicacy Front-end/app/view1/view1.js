@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.view1', ['ngRoute'])
+angular.module('myApp.view1', ['ngRoute', 'delicacyApp.services.products'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/view1', {
@@ -9,6 +9,10 @@ angular.module('myApp.view1', ['ngRoute'])
   });
 }])
 
-.controller('View1Ctrl', [function() {
-
+.controller('View1Ctrl', ['$scope', '$routeParams', 'products', function($scope, $routeParams, products) {
+	$scope.quantity = $routeParams.quantity;
+	if ($scope.quantity == undefined) {
+		$scope.quantity = appConstants.defaultQuantity;
+	}
+	$scope.response = products.newest($scope.quantity);
 }]);
