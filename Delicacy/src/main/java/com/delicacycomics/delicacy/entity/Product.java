@@ -13,6 +13,11 @@ public class Product {
 
     protected Product() { }
 
+    public Product(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Product(String name) {
         this.name = name;
     }
