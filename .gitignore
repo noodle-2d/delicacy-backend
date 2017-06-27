@@ -14,3 +14,6 @@ hs_err_pid*
 Delicacy/target/
 Delicacy/Delicacy.iml
 Delicacy/.idea
+
+Delicacy Front-end/app/bower_components/
+Delicacy Front-end/node_modules/
