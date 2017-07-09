@@ -54,7 +54,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="Orders">
+<table name="orders">
 	<schema name="public"/>
 	<position x="1156" y="76"/>
 	<column name="order_id">
@@ -72,12 +72,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="note">
 		<type name="text"/>
 	</column>
-	<constraint name="pk_order_id" type="pk-constr" factor="10" table="public.&quot;Orders&quot;">
+	<constraint name="pk_order_id" type="pk-constr" factor="10" table="public.orders">
 		<columns names="order_id" ref-type="src-columns"/>
 	</constraint>
 </table>
 
-<table name="Users">
+<table name="users">
 	<schema name="public"/>
 	<position x="800" y="15"/>
 	<column name="user_id">
@@ -113,12 +113,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="registration_date">
 		<type name="date"/>
 	</column>
-	<constraint name="pk_user_id" type="pk-constr" factor="10" table="public.&quot;Users&quot;">
+	<constraint name="pk_user_id" type="pk-constr" factor="10" table="public.users">
 		<columns names="user_id" ref-type="src-columns"/>
 	</constraint>
 </table>
 
-<table name="Order_Items">
+<table name="order_items">
 	<schema name="public"/>
 	<position x="919" y="294"/>
 	<column name="order_item_id">
@@ -133,7 +133,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="amount">
 		<type name="bigint"/>
 	</column>
-	<constraint name="pk_order_item_id" type="pk-constr" factor="10" table="public.&quot;Order_Items&quot;">
+	<constraint name="pk_order_item_id" type="pk-constr" factor="10" table="public.order_items">
 		<columns names="order_item_id" ref-type="src-columns"/>
 	</constraint>
 </table>
@@ -300,17 +300,17 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<columns names="subject_id" ref-type="dst-columns"/>
 </constraint>
 <constraint name="fk_user_id" type="fk-constr"	 comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;Users&quot;" table="public.&quot;Orders&quot;">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.users" table="public.orders">
 	<columns names="user_id" ref-type="src-columns"/>
 	<columns names="user_id" ref-type="dst-columns"/>
 </constraint>
 <constraint name="fk_order_id" type="fk-constr"	 comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;Orders&quot;" table="public.&quot;Order_Items&quot;">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.orders" table="public.order_items">
 	<columns names="order_id" ref-type="src-columns"/>
 	<columns names="order_id" ref-type="dst-columns"/>
 </constraint>
 <constraint name="fk_product_id_order_items" type="fk-constr"	 comparison-type="MATCH FULL"
-	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.products" table="public.&quot;Order_Items&quot;">
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.products" table="public.order_items">
 	<columns names="product_id" ref-type="src-columns"/>
 	<columns names="product_id" ref-type="dst-columns"/>
 </constraint>
@@ -360,8 +360,8 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<columns names="product_id" ref-type="dst-columns"/>
 </constraint>
 <relationship name="&quot;rel_Orders_Users&quot;" type="relfk"
-	 src-table="public.&quot;Orders&quot;"
-	 dst-table="public.&quot;Users&quot;"
+	 src-table="public.orders"
+	 dst-table="public.users"
 	 src-required="true" dst-required="true"/>
 
 <relationship name="rel_products_authors_books" type="relfk"
@@ -395,12 +395,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 src-required="true" dst-required="true"/>
 
 <relationship name="&quot;rel_Order_Items_Orders&quot;" type="relfk"
-	 src-table="public.&quot;Order_Items&quot;"
-	 dst-table="public.&quot;Orders&quot;"
+	 src-table="public.order_items"
+	 dst-table="public.orders"
 	 src-required="true" dst-required="true"/>
 
 <relationship name="&quot;rel_Order_Items_products&quot;" type="relfk"
-	 src-table="public.&quot;Order_Items&quot;"
+	 src-table="public.order_items"
 	 dst-table="public.products"
 	 src-required="true" dst-required="true"/>
 

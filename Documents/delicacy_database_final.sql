@@ -50,8 +50,8 @@ COMMENT ON CONSTRAINT "pk_id_Book" ON public.books IS 'Id_Book';
 -- ddl-end --
 -- ddl-end --
 
--- object: public."Orders" | type: TABLE --
-CREATE TABLE public."Orders"(
+-- object: public.orders | type: TABLE --
+CREATE TABLE public.orders(
 	order_id bigserial,
 	user_id bigserial,
 	date_of_creation date NOT NULL,
@@ -61,8 +61,8 @@ CREATE TABLE public."Orders"(
 
 );
 -- ddl-end --
--- object: public."Users" | type: TABLE --
-CREATE TABLE public."Users"(
+-- object: public.users | type: TABLE --
+CREATE TABLE public.users(
 	user_id bigserial,
 	login varchar(200),
 	password_hash varchar(1000),
@@ -78,8 +78,8 @@ CREATE TABLE public."Users"(
 
 );
 -- ddl-end --
--- object: public."Order_Items" | type: TABLE --
-CREATE TABLE public."Order_Items"(
+-- object: public.order_items | type: TABLE --
+CREATE TABLE public.order_items(
 	order_item_id bigserial,
 	order_id bigserial,
 	product_id bigserial,
@@ -201,21 +201,21 @@ ON DELETE NO ACTION ON UPDATE NO ACTION NOT DEFERRABLE;
 
 
 -- object: fk_user_id | type: CONSTRAINT --
-ALTER TABLE public."Orders" ADD CONSTRAINT fk_user_id FOREIGN KEY (user_id)
-REFERENCES public."Users" (user_id) MATCH FULL
+ALTER TABLE public.orders ADD CONSTRAINT fk_user_id FOREIGN KEY (user_id)
+REFERENCES public.users (user_id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION NOT DEFERRABLE;
 -- ddl-end --
 
 
 -- object: fk_order_id | type: CONSTRAINT --
-ALTER TABLE public."Order_Items" ADD CONSTRAINT fk_order_id FOREIGN KEY (order_id)
-REFERENCES public."Orders" (order_id) MATCH FULL
+ALTER TABLE public.order_items ADD CONSTRAINT fk_order_id FOREIGN KEY (order_id)
+REFERENCES public.orders (order_id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION NOT DEFERRABLE;
 -- ddl-end --
 
 
 -- object: fk_product_id_order_items | type: CONSTRAINT --
-ALTER TABLE public."Order_Items" ADD CONSTRAINT fk_product_id_order_items FOREIGN KEY (product_id)
+ALTER TABLE public.order_items ADD CONSTRAINT fk_product_id_order_items FOREIGN KEY (product_id)
 REFERENCES public.products (product_id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION NOT DEFERRABLE;
 -- ddl-end --
