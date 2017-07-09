@@ -1,24 +1,14 @@
-package com.delicacycomics.delicacy.entity;
+package com.delicacycomics.delicacy.dto;
 
-import javax.persistence.*;
+public class ProductDTO {
 
-@Entity
-@Table(name = "products")
-public class Product {
-
-    @Id
-    @GeneratedValue
     private Long id;
     private String name;
 
-    protected Product() { }
+    protected ProductDTO() { }
 
-    public Product(Long id, String name) {
+    public ProductDTO(Long id, String name) {
         this.id = id;
-        this.name = name;
-    }
-
-    public Product(String name) {
         this.name = name;
     }
 
@@ -43,19 +33,22 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Product product = (Product) o;
+        ProductDTO that = (ProductDTO) o;
 
-        return id != null ? id.equals(product.id) : product.id == null;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        return name != null ? name.equals(that.name) : that.name == null;
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Product{");
+        final StringBuilder sb = new StringBuilder("ProductDTO{");
         sb.append("id=").append(id);
         sb.append(", name='").append(name).append('\'');
         sb.append('}');

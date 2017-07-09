@@ -1,24 +1,24 @@
-package com.delicacycomics.delicacy.rest.controller;
+package com.delicacycomics.delicacy.service;
 
 import com.delicacycomics.delicacy.entity.Product;
 import com.delicacycomics.delicacy.repository.ProductRepository;
-import com.delicacycomics.delicacy.rest.response.ProductsGroup;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-@RestController
-public class MainPageController {
+@Service
+public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
 
-    @RequestMapping(name = "/newest", method = RequestMethod.GET)
-    public ProductsGroup newestProducts(@RequestParam(name = "quantity", defaultValue = "5") int quantity) {
+    @Transactional
+    public List<Product> findNewestProducts(int quantity) {
         Set<Product> productsSet = new TreeSet<>((firstProduct, secondProduct) ->
                 -Long.compare(firstProduct.getId(), secondProduct.getId())
         );
@@ -31,7 +31,7 @@ public class MainPageController {
                 break;
             }
         }
-        return new ProductsGroup(productsList);
+        return productsList;
     }
 
 }

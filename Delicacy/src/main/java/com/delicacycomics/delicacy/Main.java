@@ -14,15 +14,4 @@ public class Main {
         SpringApplication.run(Main.class, args);
     }
 
-//    @Bean
-//    public CommandLineRunner demo(ProductRepository repository) {
-//        return args -> {
-//            LOG.info("Products found with findAll():");
-//            for (Product product: repository.findAll()) {
-//                LOG.info("Product: {}", product);
-//            }
-//            LOG.info("The end of demo.");
-//        };
-//    }
-
 }
