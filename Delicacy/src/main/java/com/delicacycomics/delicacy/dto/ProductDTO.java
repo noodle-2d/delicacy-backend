@@ -3,13 +3,13 @@ package com.delicacycomics.delicacy.dto;
 public class ProductDTO {
 
     private Long id;
-    private String name;
+    private String title;
 
     protected ProductDTO() { }
 
-    public ProductDTO(Long id, String name) {
+    public ProductDTO(Long id, String title) {
         this.id = id;
-        this.name = name;
+        this.title = title;
     }
 
     public Long getId() {
@@ -20,12 +20,12 @@ public class ProductDTO {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
@@ -36,23 +36,22 @@ public class ProductDTO {
         ProductDTO that = (ProductDTO) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        return name != null ? name.equals(that.name) : that.name == null;
+        return title != null ? title.equals(that.title) : that.title == null;
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (title != null ? title.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("ProductDTO{");
-        sb.append("id=").append(id);
-        sb.append(", name='").append(name).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "ProductDTO{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                '}';
     }
 
 }

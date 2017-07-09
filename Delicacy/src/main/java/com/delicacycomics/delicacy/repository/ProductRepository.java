@@ -5,4 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ProductRepository extends CrudRepository<Product, Long> {
 
+//    @Query(name = "") // Добавить JPQL запрос для доступа в базу
+//    List<Product> findNewestProducts(int quantity);
+
 }

@@ -111,7 +111,7 @@ COMMENT ON CONSTRAINT pk_id_attributes ON public.attributes IS 'Id_Book';
 CREATE TABLE public.products(
 	product_id bigserial,
 	title varchar(200) NOT NULL,
-	price money,
+	price decimal(15,2),
 	remainder bigint,
 	CONSTRAINT pk_product_id_products PRIMARY KEY (product_id),
 	CONSTRAINT un_title UNIQUE (title)

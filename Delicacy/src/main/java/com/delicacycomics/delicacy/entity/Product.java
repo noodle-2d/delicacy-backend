@@ -2,24 +2,28 @@ package com.delicacycomics.delicacy.entity;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "products")
+@Entity // Сказать ORM, что этот класс - сущность
+@Table(name = "products") // Указать, с какой таблицей мапить
 public class Product {
 
-    @Id
-    @GeneratedValue
+    @Id // Указывает, что это поле - первичный ключ
+    @GeneratedValue // Указывает, что в это поле нужно генерировать уникальное значение
+    @Column(name = "product_id") // С каким полем мапить
     private Long id;
-    private String name;
+    private String title;
+    private Double price;
+    private Long remainder;
 
     protected Product() { }
 
-    public Product(Long id, String name) {
-        this.id = id;
-        this.name = name;
+    public Product(String title, Double price, Long remainder) {
+        this.title = title;
+        this.price = price;
+        this.remainder = remainder;
     }
 
-    public Product(String name) {
-        this.name = name;
+    public Product(String title) {
+        this.title = title;
     }
 
     public Long getId() {
@@ -30,12 +34,28 @@ public class Product {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Long getRemainder() {
+        return remainder;
+    }
+
+    public void setRemainder(Long remainder) {
+        this.remainder = remainder;
     }
 
     @Override
@@ -55,11 +75,12 @@ public class Product {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Product{");
-        sb.append("id=").append(id);
-        sb.append(", name='").append(name).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "Product{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", price=" + price +
+                ", remainder=" + remainder +
+                '}';
     }
 
 }

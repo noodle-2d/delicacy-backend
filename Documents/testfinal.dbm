@@ -181,7 +181,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<comment><![CDATA[Название книги]]></comment>
 	</column>
 	<column name="price">
-		<type name="money"/>
+		<type name="decimal" length="15" precision="2"/>
 	</column>
 	<column name="remainder">
 		<type name="bigint"/>

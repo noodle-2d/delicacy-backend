@@ -18,3 +18,5 @@ insert into products (title, price, remainder) values ('Title 17', 20, 10);
 insert into products (title, price, remainder) values ('Title 18', 20, 10);
 insert into products (title, price, remainder) values ('Title 19', 20, 10);
 insert into products (title, price, remainder) values ('Title 20', 20, 10);
+
+--select ord_pr.* from (select pr.* from products pr order by pr.product_id desc) ord_pr where row <= 10;
