@@ -17,16 +17,15 @@ SET check_function_bodies = false;
 
 -- object: public.books | type: TABLE --
 CREATE TABLE public.books(
-	product_id bigserial,
-	type bigserial NOT NULL,
-	publisher bigserial,
-	publisher_local bigserial,
-	"ISBN" varchar(18),
+	product_id bigint,
+	type bigint,
+	publisher bigint,
+	publisher_local bigint,
+	isbn varchar(18),
 	synopsis_text text,
 	format varchar(50),
 	pages_count bigint,
-	CONSTRAINT "pk_id_Book" PRIMARY KEY (product_id),
-	CONSTRAINT "un_ISBN" UNIQUE ("ISBN")
+	CONSTRAINT "pk_id_Book" PRIMARY KEY (product_id)
 
 );
 -- ddl-end --
@@ -38,7 +37,7 @@ COMMENT ON COLUMN public.books.publisher IS 'Издатель';
 -- ddl-end --
 COMMENT ON COLUMN public.books.publisher_local IS 'Издатель в России';
 -- ddl-end --
-COMMENT ON COLUMN public.books."ISBN" IS 'ISBN-кодировка книги';
+COMMENT ON COLUMN public.books.isbn IS 'ISBN-кодировка книги';
 -- ddl-end --
 COMMENT ON COLUMN public.books.synopsis_text IS 'Описание';
 -- ddl-end --
@@ -53,7 +52,7 @@ COMMENT ON CONSTRAINT "pk_id_Book" ON public.books IS 'Id_Book';
 -- object: public.orders | type: TABLE --
 CREATE TABLE public.orders(
 	order_id bigserial,
-	user_id bigserial,
+	user_id bigint,
 	date_of_creation date NOT NULL,
 	status varchar(200) NOT NULL,
 	note text,
@@ -81,8 +80,8 @@ CREATE TABLE public.users(
 -- object: public.order_items | type: TABLE --
 CREATE TABLE public.order_items(
 	order_item_id bigserial,
-	order_id bigserial,
-	product_id bigserial,
+	order_id bigint,
+	product_id bigint,
 	amount bigint,
 	CONSTRAINT pk_order_item_id PRIMARY KEY (order_item_id)
 
@@ -93,7 +92,7 @@ CREATE TABLE public.attributes(
 	product_id bigserial,
 	type varchar(1000) NOT NULL,
 	height bigint,
-	manufacturer bigserial,
+	manufacturer bigint,
 	series varchar(200),
 	material varchar(100),
 	description text,
@@ -113,6 +112,7 @@ CREATE TABLE public.products(
 	title varchar(200) NOT NULL,
 	price decimal(15,2),
 	remainder bigint,
+	date date,
 	CONSTRAINT pk_product_id_products PRIMARY KEY (product_id),
 	CONSTRAINT un_title UNIQUE (title)
 
@@ -137,20 +137,20 @@ CREATE TABLE public.subjects(
 -- ddl-end --
 -- object: public.products_authors | type: TABLE --
 CREATE TABLE public.products_authors(
-	product_id bigserial,
-	subject_id bigserial
+	product_id bigint NOT NULL,
+	subject_id bigint NOT NULL
 );
 -- ddl-end --
 -- object: public.products_artists | type: TABLE --
 CREATE TABLE public.products_artists(
-	product_id bigserial,
-	subject_id bigserial
+	product_id bigint NOT NULL,
+	subject_id bigint NOT NULL
 );
 -- ddl-end --
 -- object: public.products_tags | type: TABLE --
 CREATE TABLE public.products_tags(
-	product_id bigserial,
-	tag_id bigserial,
+	product_id bigint NOT NULL,
+	tag_id bigint NOT NULL,
 	CONSTRAINT pk_product_id_tag_id_products_tags PRIMARY KEY (product_id,tag_id)
 
 );
@@ -166,7 +166,7 @@ CREATE TABLE public.tags(
 -- object: public.pictures | type: TABLE --
 CREATE TABLE public.pictures(
 	picture_id bigserial,
-	product_id bigserial,
+	product_id bigint,
 	show_order varchar(1000),
 	CONSTRAINT pk_picture_id PRIMARY KEY (picture_id)
 

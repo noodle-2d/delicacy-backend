@@ -14,22 +14,22 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="public"/>
 	<position x="181" y="196"/>
 	<column name="product_id">
-		<type name="bigserial"/>
+		<type name="bigint"/>
 		<comment><![CDATA[ID Книги]]></comment>
 	</column>
-	<column name="type" not-null="true">
-		<type name="bigserial" length="200"/>
+	<column name="type">
+		<type name="bigint" length="200"/>
 		<comment><![CDATA[Категория книги]]></comment>
 	</column>
 	<column name="publisher">
-		<type name="bigserial"/>
+		<type name="bigint"/>
 		<comment><![CDATA[Издатель]]></comment>
 	</column>
 	<column name="publisher_local">
-		<type name="bigserial"/>
+		<type name="bigint"/>
 		<comment><![CDATA[Издатель в России]]></comment>
 	</column>
-	<column name="ISBN">
+	<column name="isbn">
 		<type name="varchar" length="18"/>
 		<comment><![CDATA[ISBN-кодировка книги]]></comment>
 	</column>
@@ -49,9 +49,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<columns names="product_id" ref-type="src-columns"/>
 		<comment><![CDATA[Id_Book]]></comment>
 	</constraint>
-	<constraint name="un_ISBN" type="uq-constr" factor="10" table="public.books">
-		<columns names="ISBN" ref-type="src-columns"/>
-	</constraint>
 </table>
 
 <table name="orders">
@@ -61,7 +58,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="bigserial"/>
 	</column>
 	<column name="user_id">
-		<type name="bigserial"/>
+		<type name="bigint"/>
 	</column>
 	<column name="date_of_creation" not-null="true">
 		<type name="date"/>
@@ -125,10 +122,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="bigserial"/>
 	</column>
 	<column name="order_id">
-		<type name="bigserial"/>
+		<type name="bigint"/>
 	</column>
 	<column name="product_id">
-		<type name="bigserial"/>
+		<type name="bigint"/>
 	</column>
 	<column name="amount">
 		<type name="bigint"/>
@@ -152,7 +149,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="bigint"/>
 	</column>
 	<column name="manufacturer">
-		<type name="bigserial"/>
+		<type name="bigint"/>
 	</column>
 	<column name="series">
 		<type name="varchar" length="200"/>
@@ -186,6 +183,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="remainder">
 		<type name="bigint"/>
 	</column>
+	<column name="date">
+		<type name="date"/>
+	</column>
 	<constraint name="pk_product_id_products" type="pk-constr" factor="10" table="public.products">
 		<columns names="product_id" ref-type="src-columns"/>
 		<comment><![CDATA[Id_Book]]></comment>
@@ -215,33 +215,33 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="products_authors">
 	<schema name="public"/>
 	<position x="36" y="416"/>
-	<column name="product_id">
-		<type name="bigserial"/>
+	<column name="product_id" not-null="true">
+		<type name="bigint"/>
 	</column>
-	<column name="subject_id">
-		<type name="bigserial"/>
+	<column name="subject_id" not-null="true">
+		<type name="bigint"/>
 	</column>
 </table>
 
 <table name="products_artists">
 	<schema name="public"/>
 	<position x="360" y="398"/>
-	<column name="product_id">
-		<type name="bigserial"/>
+	<column name="product_id" not-null="true">
+		<type name="bigint"/>
 	</column>
-	<column name="subject_id">
-		<type name="bigserial"/>
+	<column name="subject_id" not-null="true">
+		<type name="bigint"/>
 	</column>
 </table>
 
 <table name="products_tags">
 	<schema name="public"/>
 	<position x="9" y="18"/>
-	<column name="product_id">
-		<type name="bigserial"/>
+	<column name="product_id" not-null="true">
+		<type name="bigint"/>
 	</column>
-	<column name="tag_id">
-		<type name="bigserial"/>
+	<column name="tag_id" not-null="true">
+		<type name="bigint"/>
 	</column>
 	<constraint name="pk_product_id_tag_id_products_tags" type="pk-constr" factor="10" table="public.products_tags">
 		<columns names="product_id,tag_id" ref-type="src-columns"/>
@@ -269,7 +269,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="bigserial"/>
 	</column>
 	<column name="product_id">
-		<type name="bigserial"/>
+		<type name="bigint"/>
 	</column>
 	<column name="show_order">
 		<type name="varchar" length="1000"/>
