@@ -61,7 +61,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="bigint"/>
 	</column>
 	<column name="date_of_creation" not-null="true">
-		<type name="date"/>
+		<type name="timestamp"/>
 	</column>
 	<column name="status" not-null="true">
 		<type name="varchar" length="200"/>

@@ -1,0 +1,104 @@
+package com.delicacycomics.delicacy.entity;
+
+import javax.persistence.*;
+
+/**
+ * Created by Дмитрий on 11.08.2017.
+ */
+
+@Entity
+@Table(name = "attributes")
+
+public class Attribute {
+
+    @Id
+    @GeneratedValue
+    @Column(name = "product_id")
+    private Long id;
+    private String type;
+    private Long heigh;
+    private Long manufacturer;
+    private String series;
+    private String material;
+    private String text;
+
+    protected Attribute() {}
+
+    public Attribute(String type, Long heigh, Long manufacturer, String series, String material, String text) {
+        this.type = type;
+        this.heigh = heigh;
+        this.manufacturer = manufacturer;
+        this.series = series;
+        this.material = material;
+        this.text = text;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Long getHeigh() {
+        return heigh;
+    }
+
+    public void setHeigh(Long heigh) {
+        this.heigh = heigh;
+    }
+
+    public Long getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(Long manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public String getSeries() {
+        return series;
+    }
+
+    public void setSeries(String series) {
+        this.series = series;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    @Override
+    public String toString() {
+        return "Attribute{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", heigh=" + heigh +
+                ", manufacturer=" + manufacturer +
+                ", series='" + series + '\'' +
+                ", material='" + material + '\'' +
+                ", text='" + text + '\'' +
+                '}';
+    }
+}

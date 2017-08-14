@@ -1,6 +1,7 @@
 package com.delicacycomics.delicacy.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity // Сказать ORM, что этот класс - сущность
 @Table(name = "products") // Указать, с какой таблицей мапить
@@ -12,6 +13,8 @@ public class Product {
     private Long id;
     private String title;
     private Double price;
+    @Temporal(TemporalType.DATE)
+    private Date date;
     private Long remainder;
 
     protected Product() { }

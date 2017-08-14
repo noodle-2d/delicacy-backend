@@ -53,7 +53,7 @@ COMMENT ON CONSTRAINT "pk_id_Book" ON public.books IS 'Id_Book';
 CREATE TABLE public.orders(
 	order_id bigserial,
 	user_id bigint,
-	date_of_creation date NOT NULL,
+	date_of_creation timestamp NOT NULL,
 	status varchar(200) NOT NULL,
 	note text,
 	CONSTRAINT pk_order_id PRIMARY KEY (order_id)
