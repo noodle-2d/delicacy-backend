@@ -1,6 +1,7 @@
 package com.delicacycomics.delicacy.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Дмитрий on 11.08.2017.
@@ -8,38 +9,39 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "books")
-public class Book {
+public class Book extends Product {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "product_id")
-    private Long id;
     private Long type;
     private Long publisher;
-    private Long publisher_local;
+    @Column(name = "publisher_local")
+    private Long publisherLocal;
     private String isbn;
-    private String synopsis_text;
+    @Column(name = "synopsis_text")
+    private String synopsisText;
     private String format;
-    private Long pages_count;
+    @Column(name = "pages_count")
+    private Long pagesCount;
+    @ManyToMany
+    @JoinTable(name = "products_authors",
+        joinColumns = @JoinColumn(name = "product_id"),
+        inverseJoinColumns = @JoinColumn(name = "subject_id"))
+    private List<Subject> authors;
+    @ManyToMany
+    @JoinTable(name = "products_artists",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "subject_id"))
+    private List<Subject> artists;
 
     protected Book(){}
 
-    public Book(Long type, Long publisher, Long publisher_local, String isbn, String synopsis_text, String format, Long pages_count) {
+    public Book(Long type, Long publisher, Long publisherLocal, String isbn, String synopsisText, String format, Long pagesCount) {
         this.type = type;
         this.publisher = publisher;
-        this.publisher_local = publisher_local;
+        this.publisherLocal = publisherLocal;
         this.isbn = isbn;
-        this.synopsis_text = synopsis_text;
+        this.synopsisText = synopsisText;
         this.format = format;
-        this.pages_count = pages_count;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        this.pagesCount = pagesCount;
     }
 
     public Long getType() {
@@ -58,12 +60,12 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public Long getPublisher_local() {
-        return publisher_local;
+    public Long getPublisherLocal() {
+        return publisherLocal;
     }
 
-    public void setPublisher_local(Long publisher_local) {
-        this.publisher_local = publisher_local;
+    public void setPublisherLocal(Long publisherLocal) {
+        this.publisherLocal = publisherLocal;
     }
 
     public String getIsbn() {
@@ -74,12 +76,12 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public String getSynopsis_text() {
-        return synopsis_text;
+    public String getSynopsisText() {
+        return synopsisText;
     }
 
-    public void setSynopsis_text(String synopsis_text) {
-        this.synopsis_text = synopsis_text;
+    public void setSynopsisText(String synopsisText) {
+        this.synopsisText = synopsisText;
     }
 
     public String getFormat() {
@@ -90,25 +92,40 @@ public class Book {
         this.format = format;
     }
 
-    public Long getPages_count() {
-        return pages_count;
+    public Long getPagesCount() {
+        return pagesCount;
     }
 
-    public void setPages_count(Long pages_count) {
-        this.pages_count = pages_count;
+    public void setPagesCount(Long pagesCount) {
+        this.pagesCount = pagesCount;
+    }
+
+    public List<Subject> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<Subject> authors) {
+        this.authors = authors;
+    }
+
+    public List<Subject> getArtists() {
+        return artists;
+    }
+
+    public void setArtists(List<Subject> artists) {
+        this.artists = artists;
     }
 
     @Override
     public String toString() {
         return "Book{" +
-                "id=" + id +
                 ", type=" + type +
                 ", publisher=" + publisher +
-                ", publisher_local=" + publisher_local +
+                ", publisherLocal=" + publisherLocal +
                 ", isbn='" + isbn + '\'' +
-                ", synopsis_text='" + synopsis_text + '\'' +
+                ", synopsisText='" + synopsisText + '\'' +
                 ", format='" + format + '\'' +
-                ", pages_count=" + pages_count +
+                ", pagesCount=" + pagesCount +
                 '}';
     }
 }

@@ -5,6 +5,7 @@ import java.util.Date;
 
 @Entity // Сказать ORM, что этот класс - сущность
 @Table(name = "products") // Указать, с какой таблицей мапить
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Product {
 
     @Id // Указывает, что это поле - первичный ключ
@@ -13,7 +14,7 @@ public class Product {
     private Long id;
     private String title;
     private Double price;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     private Long remainder;
 

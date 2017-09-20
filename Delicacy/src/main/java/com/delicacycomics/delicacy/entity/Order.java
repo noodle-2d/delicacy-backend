@@ -14,8 +14,9 @@ public class Order {
     @GeneratedValue
     @Column(name = "order_id")
     private Long id;
-    @Column(name = "user_id")
-    private long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     @Column(name = "date_of_creation")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateOfCreation;
@@ -25,8 +26,7 @@ public class Order {
     protected Order() {
     }
 
-    public Order(long userId, Date dateOfCreation, String status, String note) {
-        this.userId = userId;
+    public Order(Date dateOfCreation, String status, String note) {
         this.dateOfCreation = dateOfCreation;
         this.status = status;
         this.note = note;
@@ -38,14 +38,6 @@ public class Order {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
     }
 
     public Date getDateOfCreation() {
@@ -76,7 +68,7 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", userId=" + userId +
+                ", user=" + user +
                 ", dateOfCreation=" + dateOfCreation +
                 ", status='" + status + '\'' +
                 ", note='" + note + '\'' +

@@ -8,13 +8,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "attributes")
+public class Attribute extends Product {
 
-public class Attribute {
-
-    @Id
-    @GeneratedValue
-    @Column(name = "product_id")
-    private Long id;
     private String type;
     private Long heigh;
     private Long manufacturer;
@@ -31,14 +26,6 @@ public class Attribute {
         this.series = series;
         this.material = material;
         this.text = text;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getType() {
@@ -92,7 +79,6 @@ public class Attribute {
     @Override
     public String toString() {
         return "Attribute{" +
-                "id=" + id +
                 ", type='" + type + '\'' +
                 ", heigh=" + heigh +
                 ", manufacturer=" + manufacturer +

@@ -17,7 +17,7 @@ public class User {
     private String login;
     private String password_hash;
     private String name;
-    private String surnmame;
+    private String surname;
     private String phone_number;
 
     public User() {
@@ -55,12 +55,12 @@ public class User {
         this.name = name;
     }
 
-    public String getSurnmame() {
-        return surnmame;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setSurnmame(String surnmame) {
-        this.surnmame = surnmame;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getPhone_number() {
@@ -71,11 +71,11 @@ public class User {
         this.phone_number = phone_number;
     }
 
-    public User(String login, String password_hash, String name, String surnmame, String phone_number) {
+    public User(String login, String password_hash, String name, String surname, String phone_number) {
         this.login = login;
         this.password_hash = password_hash;
         this.name = name;
-        this.surnmame = surnmame;
+        this.surname = surname;
         this.phone_number = phone_number;
     }
 
@@ -86,7 +86,7 @@ public class User {
                 ", login='" + login + '\'' +
                 ", password_hash='" + password_hash + '\'' +
                 ", name='" + name + '\'' +
-                ", surnmame='" + surnmame + '\'' +
+                ", surname='" + surname + '\'' +
                 ", phone_number='" + phone_number + '\'' +
                 '}';
     }
