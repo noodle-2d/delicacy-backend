@@ -2,6 +2,7 @@ package com.delicacycomics.delicacy.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity // Сказать ORM, что этот класс - сущность
 @Table(name = "products") // Указать, с какой таблицей мапить
@@ -17,6 +18,12 @@ public class Product {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     private Long remainder;
+
+    @ManyToMany
+    @JoinTable(name = "products_tags",
+        joinColumns = @JoinColumn(name = "prorduct_id"),
+        inverseJoinColumns = @JoinColumn(name ="tag_id"))
+    private List<Tag> tags;
 
     protected Product() { }
 

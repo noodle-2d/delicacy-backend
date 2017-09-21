@@ -12,7 +12,10 @@ public class Attribute extends Product {
 
     private String type;
     private Long heigh;
-    private Long manufacturer;
+
+    @ManyToOne
+    @JoinColumn(name = "subject_id")
+    private Subject manufacturer;
     private String series;
     private String material;
     private String text;
@@ -22,7 +25,6 @@ public class Attribute extends Product {
     public Attribute(String type, Long heigh, Long manufacturer, String series, String material, String text) {
         this.type = type;
         this.heigh = heigh;
-        this.manufacturer = manufacturer;
         this.series = series;
         this.material = material;
         this.text = text;
@@ -42,14 +44,6 @@ public class Attribute extends Product {
 
     public void setHeigh(Long heigh) {
         this.heigh = heigh;
-    }
-
-    public Long getManufacturer() {
-        return manufacturer;
-    }
-
-    public void setManufacturer(Long manufacturer) {
-        this.manufacturer = manufacturer;
     }
 
     public String getSeries() {

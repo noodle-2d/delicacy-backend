@@ -1,6 +1,7 @@
 package com.delicacycomics.delicacy.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by Дмитрий on 11.08.2017.
@@ -15,10 +16,22 @@ public class User {
     @Column(name = "user_id")
     private Long id;
     private String login;
-    private String password_hash;
+    @Column(name = "password_hash")
+    private String passwordHash;
     private String name;
     private String surname;
-    private String phone_number;
+    @Column(name = "phone_number")
+    private String phoneNumber;
+    @Column(name = "ip_address")
+    private String ipAddress;
+    @Column(name = "session_key")
+    private String sessionKey;
+    @Column(name = "last_visited_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
+    private String role;
+    @Column(name = "registration_date")
+    private Date registrationDate;
 
     public User() {
     }
@@ -39,12 +52,12 @@ public class User {
         this.login = login;
     }
 
-    public String getPassword_hash() {
-        return password_hash;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setPassword_hash(String password_hash) {
-        this.password_hash = password_hash;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     public String getName() {
@@ -63,20 +76,20 @@ public class User {
         this.surname = surname;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public User(String login, String password_hash, String name, String surname, String phone_number) {
+    public User(String login, String passwordHash, String name, String surname, String phoneNumber) {
         this.login = login;
-        this.password_hash = password_hash;
+        this.passwordHash = passwordHash;
         this.name = name;
         this.surname = surname;
-        this.phone_number = phone_number;
+        this.phoneNumber = phoneNumber;
     }
 
     @Override
@@ -84,10 +97,10 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", login='" + login + '\'' +
-                ", password_hash='" + password_hash + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", phone_number='" + phone_number + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
 }

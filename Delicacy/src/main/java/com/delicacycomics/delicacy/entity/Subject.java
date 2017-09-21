@@ -17,6 +17,10 @@ public class Subject {
     private String name;
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "type")
+    private Book book;
+
     protected Subject() {}
 
     public Subject(String name, String description) {

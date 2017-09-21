@@ -15,14 +15,18 @@ public class Picture {
     @Column(name = "picture_id")
     private Long id;
     private Long idOfProduct;
-    private String show_order;
+    @Column(name = "show_order")
+    private String showOrder;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     protected Picture() {
     }
 
-    public Picture(Long idOfProduct, String show_order) {
+    public Picture(Long idOfProduct, String showOrder) {
         this.idOfProduct = idOfProduct;
-        this.show_order = show_order;
+        this.showOrder = showOrder;
     }
 
     public Long getId() {
@@ -41,12 +45,12 @@ public class Picture {
         this.idOfProduct = idOfProduct;
     }
 
-    public String getShow_order() {
-        return show_order;
+    public String getShowOrder() {
+        return showOrder;
     }
 
-    public void setShow_order(String show_order) {
-        this.show_order = show_order;
+    public void setShowOrder(String showOrder) {
+        this.showOrder = showOrder;
     }
 
     @Override
@@ -54,7 +58,7 @@ public class Picture {
         return "Picture{" +
                 "id=" + id +
                 ", idOfProduct=" + idOfProduct +
-                ", show_order='" + show_order + '\'' +
+                ", showOrder='" + showOrder + '\'' +
                 '}';
     }
 }
