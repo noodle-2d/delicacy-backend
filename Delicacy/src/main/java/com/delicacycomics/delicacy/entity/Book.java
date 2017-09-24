@@ -11,7 +11,6 @@ import java.util.List;
 @Table(name = "books")
 public class Book extends Product {
 
-    private Long type;
     private Long publisher;
     @Column(name = "publisher_local")
     private Long publisherLocal;
@@ -31,11 +30,13 @@ public class Book extends Product {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "subject_id"))
     private List<Subject> artists;
+    @ManyToOne
+    @JoinColumn(name = "type")
+    private Subject type;
 
     protected Book(){}
 
-    public Book(Long type, Long publisher, Long publisherLocal, String isbn, String synopsisText, String format, Long pagesCount) {
-        this.type = type;
+    public Book(Long publisher, Long publisherLocal, String isbn, String synopsisText, String format, Long pagesCount) {
         this.publisher = publisher;
         this.publisherLocal = publisherLocal;
         this.isbn = isbn;
@@ -44,11 +45,11 @@ public class Book extends Product {
         this.pagesCount = pagesCount;
     }
 
-    public Long getType() {
+    public Subject getType() {
         return type;
     }
 
-    public void setType(Long type) {
+    public void setType(Subject type) {
         this.type = type;
     }
 

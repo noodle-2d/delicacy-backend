@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Attribute extends Product {
 
     private String type;
-    private Long heigh;
+    private Long height;
 
     @ManyToOne
     @JoinColumn(name = "subject_id")
@@ -22,9 +22,9 @@ public class Attribute extends Product {
 
     protected Attribute() {}
 
-    public Attribute(String type, Long heigh, Long manufacturer, String series, String material, String text) {
+    public Attribute(String type, Long height, String series, String material, String text) {
         this.type = type;
-        this.heigh = heigh;
+        this.height = height;
         this.series = series;
         this.material = material;
         this.text = text;
@@ -38,12 +38,12 @@ public class Attribute extends Product {
         this.type = type;
     }
 
-    public Long getHeigh() {
-        return heigh;
+    public Long getHeight() {
+        return height;
     }
 
-    public void setHeigh(Long heigh) {
-        this.heigh = heigh;
+    public void setHeight(Long height) {
+        this.height = height;
     }
 
     public String getSeries() {
@@ -74,7 +74,7 @@ public class Attribute extends Product {
     public String toString() {
         return "Attribute{" +
                 ", type='" + type + '\'' +
-                ", heigh=" + heigh +
+                ", height=" + height +
                 ", manufacturer=" + manufacturer +
                 ", series='" + series + '\'' +
                 ", material='" + material + '\'' +
