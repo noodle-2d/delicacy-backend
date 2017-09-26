@@ -11,13 +11,10 @@ import java.util.List;
 @Table(name = "books")
 public class Book extends Product {
 
-    private Long type;
     private Long publisher;
     @Column(name = "publisher_local")
     private Long publisherLocal;
     private String isbn;
-    @Column(name = "synopsis_text")
-    private String synopsisText;
     private String format;
     @Column(name = "pages_count")
     private Long pagesCount;
@@ -35,22 +32,13 @@ public class Book extends Product {
     protected Book(){}
 
     public Book(Long type, Long publisher, Long publisherLocal, String isbn, String synopsisText, String format, Long pagesCount) {
-        this.type = type;
         this.publisher = publisher;
         this.publisherLocal = publisherLocal;
         this.isbn = isbn;
-        this.synopsisText = synopsisText;
         this.format = format;
         this.pagesCount = pagesCount;
     }
 
-    public Long getType() {
-        return type;
-    }
-
-    public void setType(Long type) {
-        this.type = type;
-    }
 
     public Long getPublisher() {
         return publisher;
@@ -74,14 +62,6 @@ public class Book extends Product {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
-    }
-
-    public String getSynopsisText() {
-        return synopsisText;
-    }
-
-    public void setSynopsisText(String synopsisText) {
-        this.synopsisText = synopsisText;
     }
 
     public String getFormat() {
@@ -119,11 +99,9 @@ public class Book extends Product {
     @Override
     public String toString() {
         return "Book{" +
-                ", type=" + type +
                 ", publisher=" + publisher +
                 ", publisherLocal=" + publisherLocal +
                 ", isbn='" + isbn + '\'' +
-                ", synopsisText='" + synopsisText + '\'' +
                 ", format='" + format + '\'' +
                 ", pagesCount=" + pagesCount +
                 '}';

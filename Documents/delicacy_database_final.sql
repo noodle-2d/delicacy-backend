@@ -18,11 +18,9 @@ SET check_function_bodies = false;
 -- object: public.books | type: TABLE --
 CREATE TABLE public.books(
 	product_id bigint,
-	type bigint,
 	publisher bigint,
 	publisher_local bigint,
 	isbn varchar(18),
-	synopsis_text text,
 	format varchar(50),
 	pages_count bigint,
 	CONSTRAINT "pk_id_Book" PRIMARY KEY (product_id)
@@ -31,15 +29,11 @@ CREATE TABLE public.books(
 -- ddl-end --
 COMMENT ON COLUMN public.books.product_id IS 'ID Книги';
 -- ddl-end --
-COMMENT ON COLUMN public.books.type IS 'Категория книги';
--- ddl-end --
 COMMENT ON COLUMN public.books.publisher IS 'Издатель';
 -- ddl-end --
 COMMENT ON COLUMN public.books.publisher_local IS 'Издатель в России';
 -- ddl-end --
 COMMENT ON COLUMN public.books.isbn IS 'ISBN-кодировка книги';
--- ddl-end --
-COMMENT ON COLUMN public.books.synopsis_text IS 'Описание';
 -- ddl-end --
 COMMENT ON COLUMN public.books.format IS 'формат';
 -- ddl-end --
@@ -53,6 +47,7 @@ COMMENT ON CONSTRAINT "pk_id_Book" ON public.books IS 'Id_Book';
 CREATE TABLE public.orders(
 	order_id bigserial,
 	user_id bigint,
+	identifier varchar(24),
 	date_of_creation timestamp NOT NULL,
 	status varchar(200) NOT NULL,
 	note text,
@@ -69,10 +64,11 @@ CREATE TABLE public.users(
 	surname varchar(1000),
 	phone_number varchar(11),
 	ip_address varchar(1000) NOT NULL,
-	session_key varchar(1000) NOT NULL,
 	last_visited_date date,
 	role varchar(1000) NOT NULL,
 	registration_date date,
+	email varchar(200),
+	link varchar(1000),
 	CONSTRAINT pk_user_id PRIMARY KEY (user_id)
 
 );
@@ -90,12 +86,10 @@ CREATE TABLE public.order_items(
 -- object: public.attributes | type: TABLE --
 CREATE TABLE public.attributes(
 	product_id bigserial,
-	type varchar(1000) NOT NULL,
 	height bigint,
 	manufacturer bigint,
 	series varchar(200),
 	material varchar(100),
-	description text,
 	CONSTRAINT pk_id_attributes PRIMARY KEY (product_id)
 
 );
@@ -110,6 +104,8 @@ COMMENT ON CONSTRAINT pk_id_attributes ON public.attributes IS 'Id_Book';
 CREATE TABLE public.products(
 	product_id bigserial,
 	title varchar(200) NOT NULL,
+	type bigint,
+	description varchar(10000),
 	price decimal(15,2),
 	remainder bigint,
 	date date,
@@ -193,13 +189,6 @@ ON DELETE NO ACTION ON UPDATE NO ACTION NOT DEFERRABLE;
 -- ddl-end --
 
 
--- object: fk_type_books_subjects | type: CONSTRAINT --
-ALTER TABLE public.books ADD CONSTRAINT fk_type_books_subjects FOREIGN KEY (type)
-REFERENCES public.subjects (subject_id) MATCH FULL
-ON DELETE NO ACTION ON UPDATE NO ACTION NOT DEFERRABLE;
--- ddl-end --
-
-
 -- object: fk_user_id | type: CONSTRAINT --
 ALTER TABLE public.orders ADD CONSTRAINT fk_user_id FOREIGN KEY (user_id)
 REFERENCES public.users (user_id) MATCH FULL
@@ -230,6 +219,13 @@ ON DELETE NO ACTION ON UPDATE NO ACTION NOT DEFERRABLE;
 
 -- object: fk_manufacturer_attributes_subjects | type: CONSTRAINT --
 ALTER TABLE public.attributes ADD CONSTRAINT fk_manufacturer_attributes_subjects FOREIGN KEY (manufacturer)
+REFERENCES public.subjects (subject_id) MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION NOT DEFERRABLE;
+-- ddl-end --
+
+
+-- object: fk_type_products_subjects | type: CONSTRAINT --
+ALTER TABLE public.products ADD CONSTRAINT fk_type_products_subjects FOREIGN KEY (type)
 REFERENCES public.subjects (subject_id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION NOT DEFERRABLE;
 -- ddl-end --
