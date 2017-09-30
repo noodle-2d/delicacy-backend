@@ -10,6 +10,8 @@ public class AddOrderDTO {
     private Long userId;
     private String note;
 
+    public AddOrderDTO() { }
+
     public AddOrderDTO(Long userId, String note) {
         this.userId = userId;
         this.note = note;
