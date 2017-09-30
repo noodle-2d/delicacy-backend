@@ -24,14 +24,14 @@ public class User {
     private String phoneNumber;
     @Column(name = "ip_address")
     private String ipAddress;
-    @Column(name = "session_key")
-    private String sessionKey;
     @Column(name = "last_visited_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     private String role;
     @Column(name = "registration_date")
     private Date registrationDate;
+    private String email;
+    private String link;
 
     public User() {
     }

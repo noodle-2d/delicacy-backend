@@ -22,6 +22,7 @@ public class Order {
     private Date dateOfCreation;
     private String status;
     private String note;
+    private String identifier;
 
     protected Order() {
     }
@@ -73,5 +74,13 @@ public class Order {
                 ", status='" + status + '\'' +
                 ", note='" + note + '\'' +
                 '}';
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 }

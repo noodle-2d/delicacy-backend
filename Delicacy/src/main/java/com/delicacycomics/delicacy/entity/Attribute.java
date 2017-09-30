@@ -27,15 +27,6 @@ public class Attribute extends Product {
         this.height = height;
         this.series = series;
         this.material = material;
-        this.text = text;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public Long getHeight() {
@@ -70,6 +61,10 @@ public class Attribute extends Product {
         this.text = text;
     }
 
+    public void setManufacturer(Subject manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
     @Override
     public String toString() {
         return "Attribute{" +
@@ -78,7 +73,7 @@ public class Attribute extends Product {
                 ", manufacturer=" + manufacturer +
                 ", series='" + series + '\'' +
                 ", material='" + material + '\'' +
-                ", text='" + text + '\'' +
                 '}';
     }
+
 }

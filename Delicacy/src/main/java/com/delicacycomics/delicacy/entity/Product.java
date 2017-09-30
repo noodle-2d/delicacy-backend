@@ -14,8 +14,12 @@ public class Product {
     @Column(name = "product_id") // С каким полем мапить
     private Long id;
     private String title;
+    @ManyToOne
+    @JoinColumn(name = "subject_id")
+    private Subject type;
+    private String description;
     private Double price;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date date;
     private Long remainder;
 
@@ -94,4 +98,19 @@ public class Product {
                 '}';
     }
 
+    public Subject getType() {
+        return type;
+    }
+
+    public void setType(Subject type) {
+        this.type = type;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }
