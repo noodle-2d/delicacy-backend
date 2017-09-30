@@ -12,7 +12,7 @@ public class Attribute extends Product {
 
     private Long height;
     @ManyToOne
-    @JoinColumn(name = "subject_id")
+    @JoinColumn(name = "manufacturer")
     private Subject manufacturer;
     private String series;
     private String material;

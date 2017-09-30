@@ -1,5 +1,9 @@
 package com.delicacycomics.delicacy.component;
 
+import com.delicacycomics.delicacy.dto.response.AttributeDTO;
+import com.delicacycomics.delicacy.dto.response.BookDTO;
+import com.delicacycomics.delicacy.entity.Attribute;
+import com.delicacycomics.delicacy.entity.Book;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
@@ -27,7 +31,8 @@ public class OrikaMapperFacadeFactory implements FactoryBean<MapperFacade> {
     }
 
     private void createMappings(MapperFactory mapperFactory) {
-        // todo: add mappings
+        mapperFactory.classMap(Book.class, BookDTO.class).byDefault().register();
+        mapperFactory.classMap(Attribute.class, AttributeDTO.class).byDefault().register();
     }
 
 }

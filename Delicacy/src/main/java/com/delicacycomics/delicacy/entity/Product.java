@@ -7,7 +7,7 @@ import java.util.List;
 @Entity // Сказать ORM, что этот класс - сущность
 @Table(name = "products") // Указать, с какой таблицей мапить
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Product {
+abstract public class Product {
 
     @Id // Указывает, что это поле - первичный ключ
     @GeneratedValue // Указывает, что в это поле нужно генерировать уникальное значение
@@ -15,7 +15,7 @@ public class Product {
     private Long id;
     private String title;
     @ManyToOne
-    @JoinColumn(name = "subject_id")
+    @JoinColumn(name = "type")
     private Subject type;
     private String description;
     private Double price;
@@ -25,7 +25,7 @@ public class Product {
 
     @ManyToMany
     @JoinTable(name = "products_tags",
-        joinColumns = @JoinColumn(name = "prorduct_id"),
+        joinColumns = @JoinColumn(name = "product_id"),
         inverseJoinColumns = @JoinColumn(name ="tag_id"))
     private List<Tag> tags;
 

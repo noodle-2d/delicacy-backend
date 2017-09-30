@@ -1,6 +1,6 @@
 package com.delicacycomics.delicacy.rest;
 
-import com.delicacycomics.delicacy.dto.AddOrderDTO;
+import com.delicacycomics.delicacy.dto.request.AddOrderDTO;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

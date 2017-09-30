@@ -1,17 +1,18 @@
 package com.delicacycomics.delicacy.rest;
 
-import com.delicacycomics.delicacy.dto.ProductDTO;
+import com.delicacycomics.delicacy.dto.response.ProductDTO;
 import com.delicacycomics.delicacy.entity.Product;
 import com.delicacycomics.delicacy.service.ProductService;
+import com.delicacycomics.delicacy.util.PageableUtils;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.awt.print.Pageable;
-import java.util.List;
-
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
 @RequestMapping("/products")
@@ -23,18 +24,13 @@ public class ProductController {
     private MapperFacade mapperFacade;
 
     @RequestMapping(method = GET)
-    public List<ProductDTO> findNewestProducts(@RequestParam(name = "quantity", required = false) Integer quantity) {
-        List<Product> products = productService.findNewestProducts(quantity);
-        return mapperFacade.mapAsList(products, ProductDTO.class);
+    public Page<ProductDTO> getProducts(Pageable pageable) {
+        Page<Product> products = productService.getProducts(pageable);
+        return PageableUtils.mapAsPage(mapperFacade, products, pageable, ProductDTO.class);
     }
 
-    @RequestMapping(path = "/page", method = GET)
-    public Page<ProductDTO> findNewestProducts(Pageable pageable) {
-        return null;
-    }
-
-    @RequestMapping(path = "/{id}", method = GET) // /product/5
-    public ProductDTO findProductById(@PathVariable(name = "id") Long id) {
+    @RequestMapping(path = "/{id}", method = GET)
+    public ProductDTO getProductById(@PathVariable(name = "id") Long id) {
         return null; // todo
     }
 

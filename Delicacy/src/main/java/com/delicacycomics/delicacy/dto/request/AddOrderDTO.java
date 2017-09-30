@@ -1,4 +1,4 @@
-package com.delicacycomics.delicacy.dto;
+package com.delicacycomics.delicacy.dto.request;
 
 //{
 //    "userId": 14,
