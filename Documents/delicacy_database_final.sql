@@ -127,6 +127,7 @@ CREATE TABLE public.subjects(
 	subject_id bigserial,
 	name varchar(200) NOT NULL,
 	description text,
+	type varchar(50) NOT NULL,
 	CONSTRAINT pk_subject_id PRIMARY KEY (subject_id)
 
 );
