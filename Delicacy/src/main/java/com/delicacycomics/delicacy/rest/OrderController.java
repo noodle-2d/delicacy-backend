@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
@@ -25,6 +27,12 @@ public class OrderController {
         // todo
 //        addOrderDTO.getNote();
 //        addOrderDTO.getUserId();
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @RequestMapping(path = "/create", method = POST)
+    public ResponseEntity createOrderFromBusket(HttpServletRequest request) {
+        System.out.println(request.getRemoteAddr()); // Getting IP Address of PC from which the request was made
         return new ResponseEntity(HttpStatus.OK);
     }
 
