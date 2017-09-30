@@ -11,9 +11,12 @@ import java.util.List;
 @Table(name = "books")
 public class Book extends Product {
 
-    private Long publisher;
-    @Column(name = "publisher_local")
-    private Long publisherLocal;
+    @ManyToOne
+    @JoinColumn(name = "publisher")
+    private Subject publisher;
+    @ManyToOne
+    @JoinColumn(name = "publisher_local")
+    private Subject publisherLocal;
     private String isbn;
     private String format;
     @Column(name = "pages_count")
@@ -28,42 +31,13 @@ public class Book extends Product {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "subject_id"))
     private List<Subject> artists;
-    @ManyToOne
-    @JoinColumn(name = "type")
-    private Subject type;
 
     protected Book(){}
 
-    public Book(Long publisher, Long publisherLocal, String isbn, String format, Long pagesCount) {
-        this.publisher = publisher;
-        this.publisherLocal = publisherLocal;
+    public Book(String isbn, String format, Long pagesCount) {
         this.isbn = isbn;
         this.format = format;
         this.pagesCount = pagesCount;
-    }
-
-    public Subject getType() {
-        return type;
-    }
-
-    public void setType(Subject type) {
-        this.type = type;
-    }
-
-    public Long getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(Long publisher) {
-        this.publisher = publisher;
-    }
-
-    public Long getPublisherLocal() {
-        return publisherLocal;
-    }
-
-    public void setPublisherLocal(Long publisherLocal) {
-        this.publisherLocal = publisherLocal;
     }
 
     public String getIsbn() {
@@ -106,6 +80,22 @@ public class Book extends Product {
         this.artists = artists;
     }
 
+    public Subject getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Subject publisher) {
+        this.publisher = publisher;
+    }
+
+    public Subject getPublisherLocal() {
+        return publisherLocal;
+    }
+
+    public void setPublisherLocal(Subject publisherLocal) {
+        this.publisherLocal = publisherLocal;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -116,4 +106,5 @@ public class Book extends Product {
                 ", pagesCount=" + pagesCount +
                 '}';
     }
+
 }

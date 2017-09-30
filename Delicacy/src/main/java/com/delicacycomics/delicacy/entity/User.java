@@ -26,14 +26,21 @@ public class User {
     private String ipAddress;
     @Column(name = "last_visited_date")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    private Date lastVisitedDate;
     private String role;
     @Column(name = "registration_date")
     private Date registrationDate;
     private String email;
     private String link;
 
-    public User() {
+    public User() { }
+
+    public User(String login, String passwordHash, String name, String surname, String phoneNumber) {
+        this.login = login;
+        this.passwordHash = passwordHash;
+        this.name = name;
+        this.surname = surname;
+        this.phoneNumber = phoneNumber;
     }
 
     public Long getId() {
@@ -84,12 +91,52 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public User(String login, String passwordHash, String name, String surname, String phoneNumber) {
-        this.login = login;
-        this.passwordHash = passwordHash;
-        this.name = name;
-        this.surname = surname;
-        this.phoneNumber = phoneNumber;
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
+
+    public Date getLastVisitedDate() {
+        return lastVisitedDate;
+    }
+
+    public void setLastVisitedDate(Date lastVisitedDate) {
+        this.lastVisitedDate = lastVisitedDate;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Date getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
     @Override
@@ -103,4 +150,5 @@ public class User {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
+
 }

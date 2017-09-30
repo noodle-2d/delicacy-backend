@@ -65,6 +65,22 @@ public class Order {
         this.note = note;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -76,11 +92,4 @@ public class Order {
                 '}';
     }
 
-    public String getIdentifier() {
-        return identifier;
-    }
-
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier;
-    }
 }

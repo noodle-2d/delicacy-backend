@@ -16,6 +16,7 @@ public class Subject {
     private Long id;
     private String name;
     private String description;
+    private String type;
 
     protected Subject() {}
 
@@ -46,6 +47,14 @@ public class Subject {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override
