@@ -55,7 +55,7 @@ public class Picture {
 
     @Override
     public String toString() {
-        return "Picture{" +
+        return "Picture" +
                 "id=" + id +
                 ", idOfProduct=" + idOfProduct +
                 ", showOrder='" + showOrder + '\'' +
