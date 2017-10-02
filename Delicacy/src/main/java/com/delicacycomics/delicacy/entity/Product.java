@@ -7,7 +7,7 @@ import java.util.List;
 @Entity // Сказать ORM, что этот класс - сущность
 @Table(name = "products") // Указать, с какой таблицей мапить
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Product {
+abstract public class Product {
 
     @Id // Указывает, что это поле - первичный ключ
     @GeneratedValue // Указывает, что в это поле нужно генерировать уникальное значение
@@ -15,7 +15,7 @@ public class Product {
     private Long id;
     private String title;
     @ManyToOne
-    @JoinColumn(name = "subject_id")
+    @JoinColumn(name = "type")
     private Subject type;
     private String description;
     private Double price;
@@ -25,7 +25,7 @@ public class Product {
 
     @ManyToMany
     @JoinTable(name = "products_tags",
-        joinColumns = @JoinColumn(name = "prorduct_id"),
+        joinColumns = @JoinColumn(name = "product_id"),
         inverseJoinColumns = @JoinColumn(name ="tag_id"))
     private List<Tag> tags;
 
@@ -73,6 +73,38 @@ public class Product {
         this.remainder = remainder;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public Subject getType() {
+        return type;
+    }
+
+    public void setType(Subject type) {
+        this.type = type;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -98,19 +130,4 @@ public class Product {
                 '}';
     }
 
-    public Subject getType() {
-        return type;
-    }
-
-    public void setType(Subject type) {
-        this.type = type;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 }

@@ -205,6 +205,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="description">
 		<type name="text"/>
 	</column>
+	<column name="type" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
 	<constraint name="pk_subject_id" type="pk-constr" factor="10" table="public.subjects">
 		<columns names="subject_id" ref-type="src-columns"/>
 	</constraint>

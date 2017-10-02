@@ -14,7 +14,6 @@ public class Picture {
     @GeneratedValue
     @Column(name = "picture_id")
     private Long id;
-    private Long idOfProduct;
     @Column(name = "show_order")
     private String showOrder;
     @ManyToOne
@@ -24,8 +23,7 @@ public class Picture {
     protected Picture() {
     }
 
-    public Picture(Long idOfProduct, String showOrder) {
-        this.idOfProduct = idOfProduct;
+    public Picture(String showOrder) {
         this.showOrder = showOrder;
     }
 
@@ -37,14 +35,6 @@ public class Picture {
         this.id = id;
     }
 
-    public Long getIdOfProduct() {
-        return idOfProduct;
-    }
-
-    public void setIdOfProduct(Long idOfProduct) {
-        this.idOfProduct = idOfProduct;
-    }
-
     public String getShowOrder() {
         return showOrder;
     }
@@ -53,12 +43,20 @@ public class Picture {
         this.showOrder = showOrder;
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     @Override
     public String toString() {
         return "Picture" +
                 "id=" + id +
-                ", idOfProduct=" + idOfProduct +
                 ", showOrder='" + showOrder + '\'' +
                 '}';
     }
+
 }

@@ -1,29 +1,11 @@
-package com.delicacycomics.delicacy.entity;
+package com.delicacycomics.delicacy.dto.response;
 
-import javax.persistence.*;
+public class SubjectDTO {
 
-/**
- * Created by Дмитрий on 11.08.2017.
- */
-
-@Entity
-@Table(name = "subjects")
-public class Subject {
-
-    @Id
-    @GeneratedValue
-    @Column(name = "subject_id")
     private Long id;
     private String name;
     private String description;
     private String type;
-
-    protected Subject() {}
-
-    public Subject(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
 
     public Long getId() {
         return id;
@@ -57,12 +39,4 @@ public class Subject {
         this.type = type;
     }
 
-    @Override
-    public String toString() {
-        return "Subject{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
-    }
 }

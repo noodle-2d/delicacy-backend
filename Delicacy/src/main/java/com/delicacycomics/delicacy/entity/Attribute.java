@@ -10,28 +10,27 @@ import javax.persistence.*;
 @Table(name = "attributes")
 public class Attribute extends Product {
 
-    private Long heigh;
-
+    private Long height;
     @ManyToOne
-    @JoinColumn(name = "subject_id")
+    @JoinColumn(name = "manufacturer")
     private Subject manufacturer;
     private String series;
     private String material;
 
     protected Attribute() {}
 
-    public Attribute(Long heigh, Long manufacturer, String series, String material) {
-        this.heigh = heigh;
+    public Attribute(Long height, String series, String material) {
+        this.height = height;
         this.series = series;
         this.material = material;
     }
 
-    public Long getHeigh() {
-        return heigh;
+    public Long getHeight() {
+        return height;
     }
 
-    public void setHeigh(Long heigh) {
-        this.heigh = heigh;
+    public void setHeight(Long height) {
+        this.height = height;
     }
 
     public String getSeries() {
@@ -50,18 +49,22 @@ public class Attribute extends Product {
         this.material = material;
     }
 
+    public Subject getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(Subject manufacturer) {
+        this.manufacturer = manufacturer;
+    }
 
     @Override
     public String toString() {
         return "Attribute{" +
-                ", heigh=" + heigh +
+                ", height=" + height +
                 ", manufacturer=" + manufacturer +
                 ", series='" + series + '\'' +
                 ", material='" + material + '\'' +
                 '}';
     }
 
-    public void setManufacturer(Subject manufacturer) {
-        this.manufacturer = manufacturer;
-    }
 }
