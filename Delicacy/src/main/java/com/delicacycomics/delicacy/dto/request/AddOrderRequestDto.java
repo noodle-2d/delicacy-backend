@@ -5,14 +5,14 @@ package com.delicacycomics.delicacy.dto.request;
 //    "note": "Note"
 //}
 
-public class AddOrderDto {
+public class AddOrderRequestDto {
 
     private Long userId;
     private String note;
 
-    public AddOrderDto() { }
+    public AddOrderRequestDto() { }
 
-    public AddOrderDto(Long userId, String note) {
+    public AddOrderRequestDto(Long userId, String note) {
         this.userId = userId;
         this.note = note;
     }
