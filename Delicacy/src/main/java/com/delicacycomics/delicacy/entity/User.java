@@ -27,7 +27,7 @@ public class User {
     @Column(name = "last_visited_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastVisitedDate;
-    private String role;
+    private UserRole role;
     @Column(name = "registration_date")
     private Date registrationDate;
     private String email;
@@ -107,11 +107,11 @@ public class User {
         this.lastVisitedDate = lastVisitedDate;
     }
 
-    public String getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 
