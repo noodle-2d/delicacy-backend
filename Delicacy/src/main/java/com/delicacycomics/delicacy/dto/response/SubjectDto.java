@@ -1,6 +1,6 @@
 package com.delicacycomics.delicacy.dto.response;
 
-public class SubjectDTO {
+public class SubjectDto {
 
     private Long id;
     private String name;

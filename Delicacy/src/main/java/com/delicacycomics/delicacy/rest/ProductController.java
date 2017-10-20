@@ -1,6 +1,6 @@
 package com.delicacycomics.delicacy.rest;
 
-import com.delicacycomics.delicacy.dto.response.ProductDTO;
+import com.delicacycomics.delicacy.dto.response.ProductDto;
 import com.delicacycomics.delicacy.entity.Product;
 import com.delicacycomics.delicacy.service.ProductService;
 import com.delicacycomics.delicacy.util.PageableUtils;
@@ -24,13 +24,13 @@ public class ProductController {
     private MapperFacade mapperFacade;
 
     @RequestMapping(method = GET)
-    public Page<ProductDTO> getProducts(Pageable pageable) {
+    public Page<ProductDto> getProducts(Pageable pageable) {
         Page<Product> products = productService.getProducts(pageable);
-        return PageableUtils.mapAsPage(mapperFacade, products, pageable, ProductDTO.class);
+        return PageableUtils.mapAsPage(mapperFacade, products, pageable, ProductDto.class);
     }
 
     @RequestMapping(path = "/{id}", method = GET)
-    public ProductDTO getProductById(@PathVariable(name = "id") Long id) {
+    public ProductDto getProductById(@PathVariable(name = "id") Long id) {
         return null; // todo
     }
 

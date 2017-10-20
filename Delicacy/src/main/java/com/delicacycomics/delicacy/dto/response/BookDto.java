@@ -2,33 +2,33 @@ package com.delicacycomics.delicacy.dto.response;
 
 import java.util.List;
 
-public class BookDTO extends ProductDTO {
+public class BookDto extends ProductDto {
 
-    private SubjectDTO publisher;
-    private SubjectDTO publisherLocal;
+    private SubjectDto publisher;
+    private SubjectDto publisherLocal;
     private String isbn;
     private String format;
     private Long pagesCount;
-    private List<SubjectDTO> authors;
-    private List<SubjectDTO> artists;
+    private List<SubjectDto> authors;
+    private List<SubjectDto> artists;
 
-    public BookDTO() {
-        super(ProductDTO.BOOK_SUBTYPE);
+    public BookDto() {
+        super(ProductDto.BOOK_SUBTYPE);
     }
 
-    public SubjectDTO getPublisher() {
+    public SubjectDto getPublisher() {
         return publisher;
     }
 
-    public void setPublisher(SubjectDTO publisher) {
+    public void setPublisher(SubjectDto publisher) {
         this.publisher = publisher;
     }
 
-    public SubjectDTO getPublisherLocal() {
+    public SubjectDto getPublisherLocal() {
         return publisherLocal;
     }
 
-    public void setPublisherLocal(SubjectDTO publisherLocal) {
+    public void setPublisherLocal(SubjectDto publisherLocal) {
         this.publisherLocal = publisherLocal;
     }
 
@@ -56,19 +56,19 @@ public class BookDTO extends ProductDTO {
         this.pagesCount = pagesCount;
     }
 
-    public List<SubjectDTO> getAuthors() {
+    public List<SubjectDto> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(List<SubjectDTO> authors) {
+    public void setAuthors(List<SubjectDto> authors) {
         this.authors = authors;
     }
 
-    public List<SubjectDTO> getArtists() {
+    public List<SubjectDto> getArtists() {
         return artists;
     }
 
-    public void setArtists(List<SubjectDTO> artists) {
+    public void setArtists(List<SubjectDto> artists) {
         this.artists = artists;
     }
 

@@ -8,16 +8,16 @@ import java.util.List;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "productSubtype")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = BookDTO.class, name = ProductDTO.BOOK_SUBTYPE),
-        @JsonSubTypes.Type(value = AttributeDTO.class, name = ProductDTO.ATTRIBUTE_SUBTYPE)})
-abstract public class ProductDTO {
+        @JsonSubTypes.Type(value = BookDto.class, name = ProductDto.BOOK_SUBTYPE),
+        @JsonSubTypes.Type(value = AttributeDTO.class, name = ProductDto.ATTRIBUTE_SUBTYPE)})
+abstract public class ProductDto {
 
     public final static String BOOK_SUBTYPE = "book";
     public final static String ATTRIBUTE_SUBTYPE = "attribute";
 
     private Long id;
     private String title;
-    private SubjectDTO type;
+    private SubjectDto type;
     private String description;
     private Double price;
     private Date date;
@@ -25,9 +25,9 @@ abstract public class ProductDTO {
     private List<TagDTO> tags;
     private String productSubtype;
 
-    public ProductDTO() { }
+    public ProductDto() { }
 
-    public ProductDTO(String productSubtype) {
+    public ProductDto(String productSubtype) {
         this.productSubtype = productSubtype;
     }
 
@@ -47,11 +47,11 @@ abstract public class ProductDTO {
         this.title = title;
     }
 
-    public SubjectDTO getType() {
+    public SubjectDto getType() {
         return type;
     }
 
-    public void setType(SubjectDTO type) {
+    public void setType(SubjectDto type) {
         this.type = type;
     }
 

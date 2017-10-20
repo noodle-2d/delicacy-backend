@@ -1,6 +1,6 @@
 package com.delicacycomics.delicacy.rest;
 
-import com.delicacycomics.delicacy.dto.request.AddOrderDTO;
+import com.delicacycomics.delicacy.dto.request.AddOrderDto;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,10 +23,10 @@ public class OrderController {
     private MapperFacade mapperFacade;
 
     @RequestMapping(path = "/add", method = POST)
-    public ResponseEntity addOrder(@RequestBody AddOrderDTO addOrderDTO) {
+    public ResponseEntity addOrder(@RequestBody AddOrderDto addOrderDto) {
         // todo
-//        addOrderDTO.getNote();
-//        addOrderDTO.getUserId();
+//        addOrderDto.getNote();
+//        addOrderDto.getUserId();
         return new ResponseEntity(HttpStatus.OK);
     }
 

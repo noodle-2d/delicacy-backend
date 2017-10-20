@@ -1,14 +1,14 @@
 package com.delicacycomics.delicacy.dto.response;
 
-public class AttributeDTO extends ProductDTO {
+public class AttributeDto extends ProductDto {
 
     private Long height;
-    private SubjectDTO manufacturer;
+    private SubjectDto manufacturer;
     private String series;
     private String material;
 
-    public AttributeDTO() {
-        super(ProductDTO.ATTRIBUTE_SUBTYPE);
+    public AttributeDto() {
+        super(ProductDto.ATTRIBUTE_SUBTYPE);
     }
 
     public Long getHeight() {
@@ -19,11 +19,11 @@ public class AttributeDTO extends ProductDTO {
         this.height = height;
     }
 
-    public SubjectDTO getManufacturer() {
+    public SubjectDto getManufacturer() {
         return manufacturer;
     }
 
-    public void setManufacturer(SubjectDTO manufacturer) {
+    public void setManufacturer(SubjectDto manufacturer) {
         this.manufacturer = manufacturer;
     }
 
