@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  */
 public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
 
+    User findByLogin(String login);
     User findByIpAddress(String ipAddress);
     User findByRole(UserRole role);
 

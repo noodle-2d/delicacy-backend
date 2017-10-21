@@ -152,4 +152,8 @@ public class User {
                 '}';
     }
 
+    public UserData toUserData() {
+        return new UserData(id, login, name, surname, role, ipAddress);
+    }
+
 }

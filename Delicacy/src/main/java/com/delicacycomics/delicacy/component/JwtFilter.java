@@ -48,8 +48,7 @@ public class JwtFilter implements Filter {
             return decodeResult.getUserData();
         }
         User user = userService.getUserByIpAddressOrGetDefault(request.getRemoteAddr());
-        return new UserData(user.getId(), user.getLogin(), user.getName(),
-                user.getSurname(), user.getRole(), user.getIpAddress());
+        return user.toUserData();
     }
 
     @Override
@@ -89,9 +88,7 @@ public class JwtFilter implements Filter {
         }
 
         @Override
-        public void setAuthenticated(boolean b) throws IllegalArgumentException {
-
-        }
+        public void setAuthenticated(boolean b) throws IllegalArgumentException { }
 
         @Override
         public String getName() {

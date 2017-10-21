@@ -49,7 +49,7 @@ public class JwtGenerator {
 
         String key = "secret";
         String token = jwtBuilder.signWith(SignatureAlgorithm.HS256, key).compact();
-        response.addHeader(AUTHORIZATION, BEARER_PREFIX + token);
+        response.setHeader(AUTHORIZATION, BEARER_PREFIX + token);
     }
 
     public DecodeResult decodeJwt(HttpServletRequest request) {
