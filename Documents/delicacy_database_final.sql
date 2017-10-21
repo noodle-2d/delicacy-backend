@@ -63,7 +63,7 @@ CREATE TABLE public.users(
 	name varchar(1000),
 	surname varchar(1000),
 	phone_number varchar(11),
-	ip_address varchar(1000) NOT NULL,
+	ip_address varchar(1000),
 	last_visited_date date,
 	role varchar(1000) NOT NULL,
 	registration_date date,

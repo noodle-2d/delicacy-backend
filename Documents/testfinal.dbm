@@ -90,7 +90,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="phone_number">
 		<type name="varchar" length="11"/>
 	</column>
-	<column name="ip_address" not-null="true">
+	<column name="ip_address">
 		<type name="varchar" length="1000"/>
 	</column>
 	<column name="last_visited_date">
