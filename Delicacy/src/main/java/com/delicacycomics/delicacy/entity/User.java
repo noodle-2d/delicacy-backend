@@ -27,6 +27,7 @@ public class User {
     @Column(name = "last_visited_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastVisitedDate;
+    @Enumerated(EnumType.STRING)
     private UserRole role;
     @Column(name = "registration_date")
     private Date registrationDate;

@@ -9,7 +9,7 @@ import java.util.List;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "productSubtype")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = BookDto.class, name = ProductDto.BOOK_SUBTYPE),
-        @JsonSubTypes.Type(value = AttributeDTO.class, name = ProductDto.ATTRIBUTE_SUBTYPE)})
+        @JsonSubTypes.Type(value = AttributeDto.class, name = ProductDto.ATTRIBUTE_SUBTYPE)})
 abstract public class ProductDto {
 
     public final static String BOOK_SUBTYPE = "book";
@@ -22,7 +22,7 @@ abstract public class ProductDto {
     private Double price;
     private Date date;
     private Long remainder;
-    private List<TagDTO> tags;
+    private List<TagDto> tags;
     private String productSubtype;
 
     public ProductDto() { }
@@ -87,11 +87,11 @@ abstract public class ProductDto {
         this.remainder = remainder;
     }
 
-    public List<TagDTO> getTags() {
+    public List<TagDto> getTags() {
         return tags;
     }
 
-    public void setTags(List<TagDTO> tags) {
+    public void setTags(List<TagDto> tags) {
         this.tags = tags;
     }
 

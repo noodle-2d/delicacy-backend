@@ -1,6 +1,8 @@
 package com.delicacycomics.delicacy.rest;
 
 import com.delicacycomics.delicacy.dto.request.AddOrderRequestDto;
+import com.delicacycomics.delicacy.entity.UserData;
+import com.delicacycomics.delicacy.service.AuthenticationService;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,8 @@ public class OrderController {
     // private OrderService orderService;
     @Autowired
     private MapperFacade mapperFacade;
+    @Autowired
+    private AuthenticationService authenticationService;
 
     @RequestMapping(path = "/add", method = POST)
     public ResponseEntity addOrder(@RequestBody AddOrderRequestDto addOrderRequestDto) {
@@ -32,7 +36,13 @@ public class OrderController {
 
     @RequestMapping(path = "/create", method = POST)
     public ResponseEntity createOrderFromBusket(HttpServletRequest request) {
-        System.out.println(request.getRemoteAddr()); // Getting IP Address of PC from which the request was made
+        // Getting IP Address of PC from which the request was made
+        System.out.println("Remote address: " + request.getRemoteAddr());
+
+        // Getting UserData with the information about current User
+        UserData userData = authenticationService.getCurrentUserData();
+        System.out.println("User data: " + userData);
+
         return new ResponseEntity(OK);
     }
 
