@@ -6,6 +6,7 @@ import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.DefaultClaims;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,9 +31,16 @@ public class JwtGenerator {
     private static final String REFRESH = "refresh";
     private static final long DAY_SECONDS = 60 * 60 * 24;
 
+    @Value("${jwt.expireDays}")
+    private int expireDays;
+    @Value("${jwt.refreshDays}")
+    private int refreshDays;
+    @Value("${jwt.secret}")
+    private String secret;
+
     public void encodeJwt(UserData userData, HttpServletResponse response) {
-        Long expire = Date.from(Instant.now().plusSeconds(DAY_SECONDS * 14)).getTime();
-        Long refresh = Date.from(Instant.now().plusSeconds(DAY_SECONDS * 3)).getTime();
+        Long expire = Date.from(Instant.now().plusSeconds(DAY_SECONDS * expireDays)).getTime();
+        Long refresh = Date.from(Instant.now().plusSeconds(DAY_SECONDS * refreshDays)).getTime();
 
         Map<String, Object> tokenData = new HashMap<>();
         tokenData.put(ID, userData.getId());
@@ -47,8 +55,7 @@ public class JwtGenerator {
         JwtBuilder jwtBuilder = Jwts.builder();
         jwtBuilder.setClaims(tokenData);
 
-        String key = "secret";
-        String token = jwtBuilder.signWith(SignatureAlgorithm.HS256, key).compact();
+        String token = jwtBuilder.signWith(SignatureAlgorithm.HS256, secret).compact();
         response.setHeader(AUTHORIZATION, BEARER_PREFIX + token);
     }
 
@@ -94,9 +101,8 @@ public class JwtGenerator {
 
     private DefaultClaims extractClaims(String token) {
         try {
-            String key = "secret";
             return (DefaultClaims)Jwts.parser()
-                    .setSigningKey(key)
+                    .setSigningKey(secret)
                     .parse(token).getBody();
         } catch (Exception ex) {
             return null;
