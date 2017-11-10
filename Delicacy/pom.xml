@@ -43,6 +43,11 @@
       <version>9.4-1202-jdbc4</version>
     </dependency>
     <dependency>
+      <groupId>org.liquibase.ext</groupId>
+      <artifactId>liquibase-postgresql</artifactId>
+      <version>3.0</version>
+    </dependency>
+    <dependency>
       <groupId>ma.glasnost.orika</groupId>
       <artifactId>orika-core</artifactId>
       <version>1.4.2</version>

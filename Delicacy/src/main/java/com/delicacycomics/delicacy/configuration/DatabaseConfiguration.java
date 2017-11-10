@@ -1,5 +1,7 @@
 package com.delicacycomics.delicacy.configuration;
 
+import liquibase.integration.spring.SpringLiquibase;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +22,15 @@ public class DatabaseConfiguration {
         DriverManagerDataSource dataSource = new DriverManagerDataSource(url, username, password);
         dataSource.setDriverClassName(driverClassName);
         return dataSource;
+    }
+
+    @Bean
+    @Autowired
+    public SpringLiquibase liquibase(DataSource dataSource) {
+        SpringLiquibase liquibase = new SpringLiquibase();
+        liquibase.setChangeLog("classpath:liquibase/db-change-log.xml");
+        liquibase.setDataSource(dataSource);
+        return liquibase;
     }
 
 }
