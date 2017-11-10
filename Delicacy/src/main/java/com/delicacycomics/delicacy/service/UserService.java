@@ -1,7 +1,6 @@
 package com.delicacycomics.delicacy.service;
 
 import com.delicacycomics.delicacy.entity.User;
-import com.delicacycomics.delicacy.entity.UserRole;
 import com.delicacycomics.delicacy.exception.NotFoundException;
 import com.delicacycomics.delicacy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +23,8 @@ public class UserService {
     }
 
     @Transactional
-    public User getUserByIpAddressOrGetDefault(String ipAddress) {
-        User user = userRepository.findByIpAddress(ipAddress);
-        if (user != null) {
-            return user;
-        } else {
-            return userRepository.findByRole(UserRole.UNAUTHORIZED);
-        }
+    public User getUserByIpAddress(String ipAddress) {
+        return userRepository.findByIpAddress(ipAddress);
     }
 
 }

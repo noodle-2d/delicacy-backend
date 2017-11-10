@@ -33,22 +33,20 @@ public class JwtFilter implements Filter {
         HttpServletResponse httpServletResponse = (HttpServletResponse)response;
 
         JwtGenerator.DecodeResult decodeResult = jwtGenerator.decodeJwt(httpServletRequest);
-        UserData userData = prepareUserData(decodeResult, httpServletRequest);
-        SecurityContextHolder.getContext().setAuthentication(new JwtAuthentication(userData));
 
-        if (decodeResult == null || decodeResult.getRefresh().isBefore(Instant.now())) {
-            jwtGenerator.encodeJwt(userData, httpServletResponse);
+        if (decodeResult != null) {
+            UserData userData = decodeResult.getUserData();
+            SecurityContextHolder.getContext().setAuthentication(new JwtAuthentication(userData));
+
+            if (decodeResult.getRefresh().isBefore(Instant.now())) {
+                User updatedUser = userService.getUserById(userData.getId());
+                if (true) { // todo: check if the User is not blocked
+                    jwtGenerator.encodeJwt(updatedUser.toUserData(), httpServletResponse);
+                }
+            }
         }
 
         chain.doFilter(request, response);
-    }
-
-    private UserData prepareUserData(JwtGenerator.DecodeResult decodeResult, HttpServletRequest request) {
-        if (decodeResult != null) {
-            return decodeResult.getUserData();
-        }
-        User user = userService.getUserByIpAddressOrGetDefault(request.getRemoteAddr());
-        return user.toUserData();
     }
 
     @Override

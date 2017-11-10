@@ -8,6 +8,7 @@ import com.delicacycomics.delicacy.entity.UserRole;
 import com.delicacycomics.delicacy.exception.ForbiddenException;
 import com.delicacycomics.delicacy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,9 +18,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static com.delicacycomics.delicacy.entity.UserRole.ADMIN;
-import static com.delicacycomics.delicacy.entity.UserRole.CUSTOMER;
-import static com.delicacycomics.delicacy.entity.UserRole.MODERATOR;
+import static com.delicacycomics.delicacy.entity.UserRole.*;
 
 @Service
 public class AuthenticationService {
@@ -34,13 +33,22 @@ public class AuthenticationService {
     private JwtGenerator jwtGenerator;
 
     public UserData getCurrentUserData() {
-        return (UserData)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            return (UserData)authentication.getPrincipal();
+        } else {
+            return null;
+        }
     }
 
     @Transactional
     public User getCurrentUser() {
         UserData userData = getCurrentUserData();
-        return userService.getUserById(userData.getId());
+        if (userData != null) {
+            return userService.getUserById(userData.getId());
+        } else {
+            return null;
+        }
     }
 
     @Transactional
@@ -59,6 +67,9 @@ public class AuthenticationService {
         User user = userRepository.findByLogin(login);
         if (user == null || !roles.contains(user.getRole())) {
             throw new ForbiddenException("User with the given login does not exist");
+        }
+        if (false) { // todo: check if the User is blocked
+            throw new ForbiddenException("User with the given login is blocked");
         }
         if (!passwordEncoder.checkPassword(password, user.getPasswordHash())) {
             throw new ForbiddenException("Incorrect password");
