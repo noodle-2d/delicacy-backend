@@ -28,6 +28,8 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastVisitedDate;
     @Enumerated(EnumType.STRING)
+    private UserStatus status;
+    @Enumerated(EnumType.STRING)
     private UserRole role;
     @Column(name = "registration_date")
     private Date registrationDate;
@@ -106,6 +108,14 @@ public class User {
 
     public void setLastVisitedDate(Date lastVisitedDate) {
         this.lastVisitedDate = lastVisitedDate;
+    }
+
+    public UserStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(UserStatus status) {
+        this.status = status;
     }
 
     public UserRole getRole() {

@@ -96,6 +96,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="last_visited_date">
 		<type name="date"/>
 	</column>
+	<column name="status" not-null="true">
+		<type name="varchar" length="20"/>
+	</column>
 	<column name="role" not-null="true">
 		<type name="varchar" length="1000"/>
 	</column>

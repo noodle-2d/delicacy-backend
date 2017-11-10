@@ -65,6 +65,7 @@ CREATE TABLE public.users(
 	phone_number varchar(11),
 	ip_address varchar(1000),
 	last_visited_date date,
+	status varchar(20) NOT NULL,
 	role varchar(1000) NOT NULL,
 	registration_date date,
 	email varchar(200),
