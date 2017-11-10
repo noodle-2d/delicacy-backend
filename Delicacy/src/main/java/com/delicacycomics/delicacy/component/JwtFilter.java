@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.time.Instant;
 import java.util.Collection;
 
+import static com.delicacycomics.delicacy.entity.UserStatus.BLOCKED;
+
 @Component
 public class JwtFilter implements Filter {
 
@@ -40,7 +42,7 @@ public class JwtFilter implements Filter {
 
             if (decodeResult.getRefresh().isBefore(Instant.now())) {
                 User updatedUser = userService.getUserById(userData.getId());
-                if (true) { // todo: check if the User is not blocked
+                if (updatedUser.getStatus() != BLOCKED) {
                     jwtGenerator.encodeJwt(updatedUser.toUserData(), httpServletResponse);
                 }
             }

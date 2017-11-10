@@ -19,6 +19,8 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.delicacycomics.delicacy.entity.UserRole.*;
+import static com.delicacycomics.delicacy.entity.UserStatus.ACTIVE;
+import static com.delicacycomics.delicacy.entity.UserStatus.BLOCKED;
 
 @Service
 public class AuthenticationService {
@@ -68,7 +70,7 @@ public class AuthenticationService {
         if (user == null || !roles.contains(user.getRole())) {
             throw new ForbiddenException("User with the given login does not exist");
         }
-        if (false) { // todo: check if the User is blocked
+        if (user.getStatus() == BLOCKED) {
             throw new ForbiddenException("User with the given login is blocked");
         }
         if (!passwordEncoder.checkPassword(password, user.getPasswordHash())) {
@@ -88,6 +90,7 @@ public class AuthenticationService {
         user = new User();
         user.setLogin(login);
         user.setPasswordHash(passwordHash);
+        user.setStatus(ACTIVE);
         user.setRole(CUSTOMER);
         userRepository.save(user);
     }
