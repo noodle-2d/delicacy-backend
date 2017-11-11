@@ -1,21 +1,12 @@
 package com.delicacycomics.delicacy.dto.request;
 
-//{
-//    "userId": 14,
-//    "note": "Note"
-//}
-
+// todo: correct this DTO class
 public class AddOrderRequestDto {
 
     private Long userId;
     private String note;
 
     public AddOrderRequestDto() { }
-
-    public AddOrderRequestDto(Long userId, String note) {
-        this.userId = userId;
-        this.note = note;
-    }
 
     public Long getUserId() {
         return userId;

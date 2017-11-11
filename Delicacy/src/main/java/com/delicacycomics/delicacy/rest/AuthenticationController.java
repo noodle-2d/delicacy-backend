@@ -15,7 +15,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping("/auth")
-public class AuthController {
+public class AuthenticationController {
 
     @Autowired
     private AuthenticationService authenticationService;

@@ -1,7 +1,6 @@
-package com.delicacycomics.delicacy.rest;
+package com.delicacycomics.delicacy.exception;
 
 import com.delicacycomics.delicacy.dto.request.ErrorDto;
-import com.delicacycomics.delicacy.exception.BaseDelicacyException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,7 +15,7 @@ public class GlobalExceptionHandler {
     public ErrorDto handleBaseDelicacyException(BaseDelicacyException exception,
                                                 HttpServletResponse response) {
         response.setStatus(exception.getHttpStatus().value());
-        return new ErrorDto(exception.getMessage());
+        return new ErrorDto(exception.getMessage(), exception.getHttpStatus().value());
     }
 
 }
