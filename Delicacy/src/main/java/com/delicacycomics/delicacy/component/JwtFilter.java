@@ -29,25 +29,45 @@ public class JwtFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException { }
 
+    // Метод вызывается при каждом вызове любого из энд-пойнтов REST API
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest)request;
         HttpServletResponse httpServletResponse = (HttpServletResponse)response;
 
+        // Вызываем этот метод, чтобы попытаться декодировать JWT токен, пришедший в хэдере Authorization
+        // DecodeResult должен содержать результат декодирования
         JwtGenerator.DecodeResult decodeResult = jwtGenerator.decodeJwt(httpServletRequest);
 
+        // Условие - если декодирование прошло успешно, и хэдер содержал валидный и ещё не протухший токен
         if (decodeResult != null) {
+            // Взять объект UserData, содержащий информацию о текущем пользователе
             UserData userData = decodeResult.getUserData();
+            // Положить информацию о текущем пользователе в SecurityContext
+            // В дальнейшем UserData будет доступна из любого места в коде, с помощью следующего вызова:
+            // authenticationService.getCurrentUserData()
+            // Этот метод присутствует в классе AuthenticationService
             SecurityContextHolder.getContext().setAuthentication(new JwtAuthentication(userData));
 
+            // Условие - если токен, полученный в хэдере, пора обновить
+            // Instant.now() - возвращает экземпляр Instant, содержащий текущий момент времени
+            // Instant - подобен классу Date, но более удобен для использования
             if (decodeResult.getRefresh().isBefore(Instant.now())) {
+                // Достаем из базы сущность, содержающую актуальную информацию о пользователе
                 User updatedUser = userService.getUserById(userData.getId());
+                // Условие - если пользователь не заблокирован
                 if (updatedUser.getStatus() != BLOCKED) {
+                    // Вызываем этот метод, чтобы записать в хэдер Authorization ответа новый JWT-токен
+                    // с обновленной информацией о пользователе
                     jwtGenerator.encodeJwt(updatedUser.toUserData(), httpServletResponse);
                 }
             }
         }
 
+        // Этот вызов нужно сделать в Filter-классе, чтобы вызвать дальнейшую цепочку фильтров и соответствующий запросу
+        // метод из контроллера. Если не сделать этот вызов, метод контроллера вообще не будет вызван.
+        // Данный метод можно не вызывать, например, в том случае, когда JWT-токен не соответствует каким-либо требованиям,
+        // и доступ данному пользователю запрещён
         chain.doFilter(request, response);
     }
 
