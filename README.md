@@ -1,2 +1,3 @@
-# Delicatessen
-Online Comic Shop
+# Delicacy
+
+TODO
