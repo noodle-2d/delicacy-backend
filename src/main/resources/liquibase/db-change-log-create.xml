@@ -169,7 +169,7 @@
             CREATE TABLE public.pictures(
             picture_id bigserial,
             product_id bigint,
-            show_order varchar(1000),
+            show_order bigint,
             CONSTRAINT pk_picture_id PRIMARY KEY (picture_id)
 
             );
