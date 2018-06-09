@@ -32,7 +32,7 @@ public class Book extends Product {
             inverseJoinColumns = @JoinColumn(name = "subject_id"))
     private List<Subject> artists;
 
-    protected Book(){}
+    public Book(){}
 
     public Book(String isbn, String format, Long pagesCount) {
         this.isbn = isbn;

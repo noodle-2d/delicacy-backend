@@ -3,6 +3,6 @@
     <changeSet id="create-hibernate-sequence" author="Ilya Kuznetsov">
         <createSequence schemaName="public"
                         sequenceName="hibernate_sequence"
-                        startValue="5"/>
+                        startValue="1"/>
     </changeSet>
 </databaseChangeLog>
