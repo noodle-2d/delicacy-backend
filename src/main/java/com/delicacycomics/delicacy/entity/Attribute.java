@@ -17,7 +17,7 @@ public class Attribute extends Product {
     private String series;
     private String material;
 
-    protected Attribute() {}
+    public Attribute() {}
 
     public Attribute(Long height, String series, String material) {
         this.height = height;

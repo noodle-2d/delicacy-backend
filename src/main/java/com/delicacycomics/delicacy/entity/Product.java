@@ -31,9 +31,11 @@ abstract public class Product {
 
     protected Product() { }
 
-    public Product(String title, Double price, Long remainder) {
+    public Product(String title, String description, Double price, Date date, Long remainder) {
         this.title = title;
+        this.description = description;
         this.price = price;
+        this.date = date;
         this.remainder = remainder;
     }
 

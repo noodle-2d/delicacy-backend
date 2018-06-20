@@ -16,13 +16,14 @@ public class Subject {
     private Long id;
     private String name;
     private String description;
-    private String type;
+    private SubjectType type;
 
     protected Subject() {}
 
-    public Subject(String name, String description) {
+    public Subject(String name, String description, SubjectType type) {
         this.name = name;
         this.description = description;
+        this.type = type;
     }
 
     public Long getId() {
@@ -49,11 +50,11 @@ public class Subject {
         this.description = description;
     }
 
-    public String getType() {
+    public SubjectType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(SubjectType type) {
         this.type = type;
     }
 
@@ -63,6 +64,8 @@ public class Subject {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", type='" + type + '\'' +
                 '}';
     }
+
 }

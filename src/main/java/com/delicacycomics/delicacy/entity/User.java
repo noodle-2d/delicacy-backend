@@ -38,12 +38,14 @@ public class User {
 
     public User() { }
 
-    public User(String login, String passwordHash, String name, String surname, String phoneNumber) {
+    public User(String login, String passwordHash, String name, String surname, String phoneNumber, UserStatus status, UserRole role) {
         this.login = login;
         this.passwordHash = passwordHash;
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
+        this.status = status;
+        this.role = role;
     }
 
     public Long getId() {
