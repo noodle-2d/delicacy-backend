@@ -20,14 +20,14 @@ public class Order {
     @Column(name = "date_of_creation")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateOfCreation;
-    private String status;
+    private UserStatus status;
     private String note;
     private String identifier;
 
-    protected Order() {
+    public Order() {
     }
 
-    public Order(Date dateOfCreation, String status, String note) {
+    public Order(Date dateOfCreation, UserStatus status, String note) {
         this.dateOfCreation = dateOfCreation;
         this.status = status;
         this.note = note;
@@ -49,11 +49,11 @@ public class Order {
         this.dateOfCreation = dateOfCreation;
     }
 
-    public String getStatus() {
+    public UserStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(UserStatus status) {
         this.status = status;
     }
 

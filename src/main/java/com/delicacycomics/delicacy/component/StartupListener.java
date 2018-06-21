@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class StartupListener {
@@ -26,10 +27,10 @@ public class StartupListener {
    private TagRepository tagRepository;
    @Autowired
    private ProductRepository productRepository;
-   //@Autowired
-  // private OrderRepository orderRepository;
-  // @Autowired
-  // private OrderItemRepository orderItemRepository;
+   @Autowired
+   private OrderRepository orderRepository;
+   @Autowired
+   private OrderItemRepository orderItemRepository;
    //@Autowired
    //private PictureRepository pictureRepository;
 
@@ -41,15 +42,13 @@ public class StartupListener {
         System.out.println("After debug data population");
     }
 
-
-
-    private void fillEntities(Object event) {
+   private void fillEntities(Object event) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
 
-        User userJediAdmin = insertUser("jedi", "123", "Alex", "Suverin", "89890807896", UserStatus.ACTIVE, UserRole.ADMIN); //some fields weren't discribe, is that a good way to move on?
-        User userSithCustomer = insertUser("sith", "1233", "Vanya", "Fydred", "87000212342", UserStatus.ACTIVE,UserRole.CUSTOMER); //some fields weren't discribe, is that a good way to move on?
-        User userOnemoreModerator = insertUser("onemore", "12212", "Bob", "Avokado", "8915261790", UserStatus.ACTIVE, UserRole.MODERATOR); //some fields weren't discribe, is that a good way to move on?
-        User userBatmnunauthorized = insertUser("batmn", "12311", "Bruce", "Wane", "8789089082", UserStatus.ACTIVE, UserRole.UNAUTHORIZED); //some fields weren't discribe, is that a good way to move on?
+        User userAdminExample = insertUser("AdminExample", "123", "Alex", "Suverin", "89890807896", UserStatus.ACTIVE, UserRole.ADMIN); //some fields weren't discribe, is that a good way to move on?
+        User userCustomerExample = insertUser("CustomerExample", "1233", "Vanya", "Fydred", "87000212342", UserStatus.ACTIVE,UserRole.CUSTOMER); //some fields weren't discribe, is that a good way to move on?
+        User userModeratorExample = insertUser("ModeratorExample", "12212", "Bob", "Avokado", "8915261790", UserStatus.ACTIVE, UserRole.MODERATOR); //some fields weren't discribe, is that a good way to move on?
+        User userUnauthorizedExample = insertUser("UnauthorizedExample", "12311", "Bruce", "Wane", "8789089082", UserStatus.ACTIVE, UserRole.UNAUTHORIZED); //some fields weren't discribe, is that a good way to move on?
         Tag tagBatman = insertTag("Бэтмен");
         Tag tagJoker = insertTag("Джокер");
         Tag tagDc = insertTag("DC");
@@ -308,6 +307,21 @@ public class StartupListener {
         ArrayList tagsMassEffectAndromeda = new ArrayList();
         tagsMassEffectAndromeda.add(tagSciFi);
        Book bookMassEffectAndromeda = insertBook("Mass Effect. Андромеда. Восстание на \"Нексусе", subjectBooks, null, 350.00, Long.parseLong("1"), "25-Jun-2017", null, subjectAzbukaAttikus, null, "Твердый переплет", Long.parseLong("344"), authorsMassEffectAndromeda, null, tagsMassEffectAndromeda, formatter);
+
+       Order orderFirstWithCustomer = insertOrder(userCustomerExample, "02-Feb-2018", UserStatus.ACTIVE, "Что-то там про заказ", UUID.randomUUID().toString(), formatter);
+       Order orderSecondWithUnauthorized = insertOrder(userUnauthorizedExample, "03-May-2018", UserStatus.ACTIVE, "Какой-то заказ", UUID.randomUUID().toString(), formatter);
+       Order orderThirdWithCustomer = insertOrder(userCustomerExample, "05-Jun-2018", UserStatus.ACTIVE, "Какое-то описание", UUID.randomUUID().toString(), formatter);
+       Order orderFourthWithUnauthorized = insertOrder(userUnauthorizedExample, "07-Jun-2018", UserStatus.ACTIVE, "Пометочка про заказ", UUID.randomUUID().toString(), formatter);
+
+       OrderItem orderItemFirstKillingJoke = insertOrderItem(bookBatmanKillingJoke, orderFirstWithCustomer, Long.parseLong("1"));
+       OrderItem orderItemFirstLongWictory = insertOrderItem(bookBatmanLongWictory, orderFirstWithCustomer, Long.parseLong("1"));
+       OrderItem orderItemFirstStickers = insertOrderItem(attributeStickers, orderFirstWithCustomer, Long.parseLong("3"));
+       OrderItem orderItemSecondHouse = insertOrderItem(bookHouseM, orderSecondWithUnauthorized, Long.parseLong("1"));
+       OrderItem orderItemSecondSabretooth = insertOrderItem(attributeSabretooth, orderSecondWithUnauthorized, Long.parseLong("1"));
+       OrderItem orderItemSecondBatman = insertOrderItem(attributeBatman, orderSecondWithUnauthorized, Long.parseLong("1"));
+       OrderItem orderItemThirdRickAndMorty = insertOrderItem(bookRickAndMorty, orderThirdWithCustomer, Long.parseLong("1"));
+       OrderItem orderItemFourth = insertOrderItem(bookMaus, orderFourthWithUnauthorized, Long.parseLong("1"));
+
     }
 
    private User insertUser(String loginContent, String passwordHashContent, String nameContent, String surnameContent, String phoneNumberContent, UserStatus userStatusContent, UserRole roleContent) {
@@ -328,7 +342,7 @@ public class StartupListener {
         return subject;
     }
 
-  private Book insertBook(String titleContent, Subject typeContent, String descriptionContent, Double priceContent, Long remainderContent, String dateContent, Subject publisherContent, Subject publisherLocalContent, String isbnContent, String formatContent, Long pagesCountContent, ArrayList<Subject> authorsContent, ArrayList<Subject> artistsContent, ArrayList<Tag> tagsContent, SimpleDateFormat formatter) {
+   private Book insertBook(String titleContent, Subject typeContent, String descriptionContent, Double priceContent, Long remainderContent, String dateContent, Subject publisherContent, Subject publisherLocalContent, String isbnContent, String formatContent, Long pagesCountContent, ArrayList<Subject> authorsContent, ArrayList<Subject> artistsContent, ArrayList<Tag> tagsContent, SimpleDateFormat formatter) {
         Book book = new Book();
         book.setTitle(titleContent);
         book.setType(typeContent);
@@ -352,7 +366,7 @@ public class StartupListener {
         return book;
   }
 
-    private Attribute insertAttribute(String titleContent, Subject typeContent, String descriptionContent, Double priceContent, Long remainderContent, String dateContent, Long heightContent, Subject manufacturerContent, String seriesContent, String materialContent, ArrayList<Tag> tagsContent, SimpleDateFormat formatter) {
+   private Attribute insertAttribute(String titleContent, Subject typeContent, String descriptionContent, Double priceContent, Long remainderContent, String dateContent, Long heightContent, Subject manufacturerContent, String seriesContent, String materialContent, ArrayList<Tag> tagsContent, SimpleDateFormat formatter) {
         Attribute attribute = new Attribute();
         attribute.setTitle(titleContent);
         attribute.setType(typeContent);
@@ -371,6 +385,30 @@ public class StartupListener {
         attribute.setTags(tagsContent);
         productRepository.save(attribute);
         return attribute;
+    }
+
+   private Order insertOrder(User userContent, String dateOfCreationContent, UserStatus statusContent, String noteContent, String identifierContent, SimpleDateFormat formatter) {
+       Order order = new Order();
+       order.setUser(userContent);
+       try {
+           order.setDateOfCreation(formatter.parse(dateOfCreationContent));
+       } catch (ParseException e) {
+           e.printStackTrace();
+       }
+       order.setStatus(statusContent);
+       order.setNote(noteContent);
+       order.setIdentifier(identifierContent);
+       orderRepository.save(order);
+       return order;
+   }
+
+   private  OrderItem insertOrderItem(Product productContent, Order orderContent, Long amountContent){
+        OrderItem orderItem = new OrderItem();
+        orderItem.setProduct(productContent);
+        orderItem.setOrder(orderContent);
+        orderItem.setAmount(amountContent);
+        orderItemRepository.save(orderItem);
+        return  orderItem;
     }
 
 }

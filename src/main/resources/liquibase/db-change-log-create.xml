@@ -51,7 +51,7 @@
             CREATE TABLE public.orders(
             order_id bigserial,
             user_id bigint,
-            identifier varchar(24),
+            identifier varchar,
             date_of_creation timestamp NOT NULL,
             status varchar(200) NOT NULL,
             note text,

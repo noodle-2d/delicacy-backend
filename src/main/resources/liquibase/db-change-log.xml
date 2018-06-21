@@ -7,5 +7,6 @@
     <include file="liquibase/db-change-log-insert-books.xml"/>
     <include file="liquibase/db-change-log-insert-attributes.xml"/>
     <include file="liquibase/db-change-log-insert-tags.xml"/>
+    <include file="liquibase/db-change-log-insert-orders.xml"/>
     <include file="liquibase/db-change-log-create-hibernate-sequence.xml"/>
 </databaseChangeLog>
