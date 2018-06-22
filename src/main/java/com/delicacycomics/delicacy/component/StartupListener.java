@@ -45,10 +45,10 @@ public class StartupListener {
    private void fillEntities(Object event) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
 
-        User userAdminExample = insertUser("AdminExample", "123", "Alex", "Suverin", "89890807896", UserStatus.ACTIVE, UserRole.ADMIN); //some fields weren't discribe, is that a good way to move on?
-        User userCustomerExample = insertUser("CustomerExample", "1233", "Vanya", "Fydred", "87000212342", UserStatus.ACTIVE,UserRole.CUSTOMER); //some fields weren't discribe, is that a good way to move on?
-        User userModeratorExample = insertUser("ModeratorExample", "12212", "Bob", "Avokado", "8915261790", UserStatus.ACTIVE, UserRole.MODERATOR); //some fields weren't discribe, is that a good way to move on?
-        User userUnauthorizedExample = insertUser("UnauthorizedExample", "12311", "Bruce", "Wane", "8789089082", UserStatus.ACTIVE, UserRole.UNAUTHORIZED); //some fields weren't discribe, is that a good way to move on?
+        User userAdminExample = insertUser("AdminExample", "123", "Alex", "Suverin", "89890807896", null, "29-Jun-2018", UserStatus.ACTIVE, UserRole.ADMIN, "07-Jan-2016", "admin@gmail.com", "http:/vk.com/admin", formatter);
+        User userCustomerExample = insertUser("CustomerExample", "1233", "Vanya", "Fydred", "87000212342", null,"7-May-2017", UserStatus.ACTIVE,UserRole.CUSTOMER,"18-May-2016", "customer@gmail.com", "http:/vk.com/customer", formatter);
+        User userModeratorExample = insertUser("ModeratorExample", "12212", "Bob", "Avokado", "8915261790", null, "28-Jun-2017", UserStatus.ACTIVE,  UserRole.MODERATOR,"07-Jan-2016", "moder@gmail.com", "http:/vk.com/moderator", formatter);
+        User userUnauthorizedExample = insertUser(null, null, null, null, null, "127.0.0.1.", null, UserStatus.ACTIVE, UserRole.UNAUTHORIZED, null, null, null, formatter);
         Tag tagBatman = insertTag("Бэтмен");
         Tag tagJoker = insertTag("Джокер");
         Tag tagDc = insertTag("DC");
@@ -324,10 +324,37 @@ public class StartupListener {
 
     }
 
-   private User insertUser(String loginContent, String passwordHashContent, String nameContent, String surnameContent, String phoneNumberContent, UserStatus userStatusContent, UserRole roleContent) {
-        User user = new User(loginContent, passwordHashContent, nameContent, surnameContent, phoneNumberContent, userStatusContent, roleContent);
-        userRepository.save(user);
-        return user;
+   private User insertUser(String loginContent, String passwordHashContent, String nameContent, String surnameContent, String phoneNumberContent, String ipAddressContent, String lastVisitedDate, UserStatus StatusContent, UserRole roleContent, String registrationDateContent, String emailContent, String linkContent, SimpleDateFormat formatter) {
+        User user = new User();
+        user.setLogin(loginContent);
+        if (passwordHashContent != null) {
+            passwordHashContent = org.apache.commons.codec.digest.DigestUtils.sha256Hex(passwordHashContent);
+        }
+        user.setPasswordHash(passwordHashContent);
+        user.setName(nameContent);
+        user.setSurname(surnameContent);
+        user.setPhoneNumber(phoneNumberContent);
+        user.setIpAddress(ipAddressContent);
+       if (lastVisitedDate != null) {
+           try {
+               user.setLastVisitedDate(formatter.parse(lastVisitedDate));
+           } catch (ParseException e) {
+               e.printStackTrace();
+           }   
+       }
+       user.setStatus(StatusContent);
+       user.setRole(roleContent);
+       if (registrationDateContent != null) {
+           try {
+               user.setRegistrationDate(formatter.parse(registrationDateContent));
+           } catch (ParseException e) {
+               e.printStackTrace();
+           }
+       }
+       user.setEmail(emailContent);
+       user.setLink(linkContent);
+       userRepository.save(user);
+       return user;
     }
 
    private Tag insertTag(String tagContent) {

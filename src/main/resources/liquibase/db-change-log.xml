@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
     <include file="liquibase/db-change-log-create.xml"/>
-    <include file="liquibase/db-change-log-insert-users.xml"/>
-    <include file="liquibase/db-change-log-insert-subjects.xml"/>
-    <include file="liquibase/db-change-log-insert-products.xml"/>
-    <include file="liquibase/db-change-log-insert-books.xml"/>
-    <include file="liquibase/db-change-log-insert-attributes.xml"/>
-    <include file="liquibase/db-change-log-insert-tags.xml"/>
-    <include file="liquibase/db-change-log-insert-orders.xml"/>
     <include file="liquibase/db-change-log-create-hibernate-sequence.xml"/>
 </databaseChangeLog>
