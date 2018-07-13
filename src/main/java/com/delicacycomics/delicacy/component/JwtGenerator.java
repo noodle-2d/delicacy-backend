@@ -23,10 +23,7 @@ public class JwtGenerator {
     private static final String BEARER_PREFIX = "Bearer ";
     private static final String ID = "id";
     private static final String LOGIN = "login";
-    private static final String NAME = "name";
-    private static final String SURNAME = "surname";
     private static final String ROLE = "role";
-    private static final String IP_ADDRESS = "ip_address";
     private static final String EXPIRE = "expire";
     private static final String REFRESH = "refresh";
     private static final long DAY_SECONDS = 60 * 60 * 24;
@@ -45,10 +42,7 @@ public class JwtGenerator {
         Map<String, Object> tokenData = new HashMap<>();
         tokenData.put(ID, userData.getId());
         tokenData.put(LOGIN, userData.getLogin());
-        tokenData.put(NAME, userData.getName());
-        tokenData.put(SURNAME, userData.getSurname());
         tokenData.put(ROLE, userData.getRole());
-        tokenData.put(IP_ADDRESS, userData.getIpAddress());
         tokenData.put(EXPIRE, expire);
         tokenData.put(REFRESH, refresh);
 
@@ -78,11 +72,8 @@ public class JwtGenerator {
 
         Long id = claims.get(ID, Long.class);
         String login = claims.get(LOGIN, String.class);
-        String name = claims.get(NAME, String.class);
-        String surname = claims.get(SURNAME, String.class);
         UserRole role = UserRole.valueOf(claims.get(ROLE, String.class));
-        String ipAddress = claims.get(IP_ADDRESS, String.class);
-        UserData userData = new UserData(id, login, name, surname, role, ipAddress);
+        UserData userData = new UserData(id, login, role);
         return new DecodeResult(userData, expire, refresh);
     }
 

@@ -54,7 +54,7 @@ public class JwtFilter implements Filter {
     @Override
     public void destroy() { }
 
-    private static class JwtAuthentication implements Authentication {
+    public static class JwtAuthentication implements Authentication {
 
         private UserData userData;
 

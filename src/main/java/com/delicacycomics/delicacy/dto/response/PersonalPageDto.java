@@ -1,52 +1,20 @@
-package com.delicacycomics.delicacy.entity;
+package com.delicacycomics.delicacy.dto.response;
 
-import javax.persistence.*;
+import com.delicacycomics.delicacy.entity.UserStatus;
+
 import java.util.Date;
 
-/**
- * Created by Дмитрий on 11.08.2017.
- */
-
-@Entity
-@Table(name = "users")
-public class User {
-
-    @Id
-    @GeneratedValue
-    @Column(name = "user_id")
+public class PersonalPageDto {
     private Long id;
     private String login;
-    @Column(name = "password_hash")
-    private String passwordHash;
     private String name;
     private String surname;
-    @Column(name = "phone_number")
     private String phoneNumber;
-    @Column(name = "ip_address")
-    private String ipAddress;
-    @Column(name = "last_visited_date")
-    @Temporal(TemporalType.TIMESTAMP)
     private Date lastVisitedDate;
-    @Enumerated(EnumType.STRING)
     private UserStatus status;
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
-    @Column(name = "registration_date")
     private Date registrationDate;
     private String email;
     private String link;
-
-    public User() { }
-
-    public User(String login, String passwordHash, String name, String surname, String phoneNumber, UserStatus status, UserRole role) {
-        this.login = login;
-        this.passwordHash = passwordHash;
-        this.name = name;
-        this.surname = surname;
-        this.phoneNumber = phoneNumber;
-        this.status = status;
-        this.role = role;
-    }
 
     public Long getId() {
         return id;
@@ -62,14 +30,6 @@ public class User {
 
     public void setLogin(String login) {
         this.login = login;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
     }
 
     public String getName() {
@@ -96,14 +56,6 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getIpAddress() {
-        return ipAddress;
-    }
-
-    public void setIpAddress(String ipAddress) {
-        this.ipAddress = ipAddress;
-    }
-
     public Date getLastVisitedDate() {
         return lastVisitedDate;
     }
@@ -118,14 +70,6 @@ public class User {
 
     public void setStatus(UserStatus status) {
         this.status = status;
-    }
-
-    public UserRole getRole() {
-        return role;
-    }
-
-    public void setRole(UserRole role) {
-        this.role = role;
     }
 
     public Date getRegistrationDate() {
@@ -154,18 +98,17 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "PersonalPageDto{" +
                 "id=" + id +
                 ", login='" + login + '\'' +
-                ", passwordHash='" + passwordHash + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", lastVisitedDate=" + lastVisitedDate +
+                ", status=" + status +
+                ", registrationDate=" + registrationDate +
+                ", email='" + email + '\'' +
+                ", link='" + link + '\'' +
                 '}';
     }
-
-    public UserData toUserData() {
-        return new UserData(id, login, role);
-    }
-
 }

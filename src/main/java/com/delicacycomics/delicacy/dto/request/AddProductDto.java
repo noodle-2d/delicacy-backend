@@ -1,34 +1,33 @@
-package com.delicacycomics.delicacy.dto.response;
+package com.delicacycomics.delicacy.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "productSubtype")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = BookDto.class, name = ProductDto.BOOK_SUBTYPE),
-        @JsonSubTypes.Type(value = AttributeDto.class, name = ProductDto.ATTRIBUTE_SUBTYPE)})
-abstract public class ProductDto {
+        @JsonSubTypes.Type(value = AddBookDto.class, name = AddProductDto.BOOK_SUBTYPE),
+        @JsonSubTypes.Type(value = AddAttributeDto.class, name = AddProductDto.ATTRIBUTE_SUBTYPE)})
+abstract public class AddProductDto {
 
     public final static String BOOK_SUBTYPE = "book";
     public final static String ATTRIBUTE_SUBTYPE = "attribute";
 
     private Long id;
     private String title;
-    private SubjectDto type;
+    private AddSubjectDto type;
     private String description;
-    private BigDecimal price;
+    private Double price;
     private Date date;
     private Long remainder;
-    private List<TagDto> tags;
+    private List<AddTagDto> tags;
     private String productSubtype;
 
-    public ProductDto() { }
+    public AddProductDto() { }
 
-    public ProductDto(String productSubtype) {
+    public AddProductDto(String productSubtype) {
         this.productSubtype = productSubtype;
     }
 
@@ -48,11 +47,11 @@ abstract public class ProductDto {
         this.title = title;
     }
 
-    public SubjectDto getType() {
+    public AddSubjectDto getType() {
         return type;
     }
 
-    public void setType(SubjectDto type) {
+    public void setType(AddSubjectDto type) {
         this.type = type;
     }
 
@@ -64,11 +63,11 @@ abstract public class ProductDto {
         this.description = description;
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -88,11 +87,11 @@ abstract public class ProductDto {
         this.remainder = remainder;
     }
 
-    public List<TagDto> getTags() {
+    public List<AddTagDto> getTags() {
         return tags;
     }
 
-    public void setTags(List<TagDto> tags) {
+    public void setTags(List<AddTagDto> tags) {
         this.tags = tags;
     }
 

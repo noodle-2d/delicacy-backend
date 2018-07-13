@@ -9,18 +9,12 @@ public class UserData implements UserDetails {
 
     private Long id;
     private String login;
-    private String name;
-    private String surname;
     private UserRole role;
-    private String ipAddress;
 
-    public UserData(Long id, String login, String name, String surname, UserRole role, String ipAddress) {
+    public UserData(Long id, String login, UserRole role) {
         this.id = id;
         this.login = login;
-        this.name = name;
-        this.surname = surname;
         this.role = role;
-        this.ipAddress = ipAddress;
     }
 
     public Long getId() {
@@ -39,36 +33,12 @@ public class UserData implements UserDetails {
         this.login = login;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
     public UserRole getRole() {
         return role;
     }
 
     public void setRole(UserRole role) {
         this.role = role;
-    }
-
-    public String getIpAddress() {
-        return ipAddress;
-    }
-
-    public void setIpAddress(String ipAddress) {
-        this.ipAddress = ipAddress;
     }
 
     @Override
@@ -111,10 +81,7 @@ public class UserData implements UserDetails {
         return "UserData{" +
                 "id=" + id +
                 ", login='" + login + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
                 ", role=" + role +
-                ", ipAddress='" + ipAddress + '\'' +
                 '}';
     }
 

@@ -1,6 +1,7 @@
 package com.delicacycomics.delicacy.rest;
 
-import com.delicacycomics.delicacy.dto.request.LoginRequestDto;
+import com.delicacycomics.delicacy.dto.request.LoginSignInDto;
+import com.delicacycomics.delicacy.dto.request.UserRegisterDto;
 import com.delicacycomics.delicacy.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -21,24 +23,24 @@ public class AuthenticationController {
     private AuthenticationService authenticationService;
 
     @RequestMapping(path = "/login", method = POST)
-    public ResponseEntity login(@RequestBody LoginRequestDto loginRequestDto,
+    public ResponseEntity login(@RequestBody LoginSignInDto loginSignInDto,
                                 HttpServletResponse response) {
-        authenticationService.authenticate(loginRequestDto.getLogin(),
-                loginRequestDto.getPassword(), response);
+        authenticationService.authenticate(loginSignInDto.getLogin(),
+                loginSignInDto.getPassword(), response);
         return new ResponseEntity(OK);
     }
 
     @RequestMapping(path = "/login/admin", method = POST)
-    public ResponseEntity loginAdmin(@RequestBody LoginRequestDto loginRequestDto,
+    public ResponseEntity loginAdmin(@RequestBody LoginSignInDto loginSignInDto,
                                      HttpServletResponse response) {
-        authenticationService.authenticateAdmin(loginRequestDto.getLogin(),
-                loginRequestDto.getPassword(), response);
+        authenticationService.authenticateAdmin(loginSignInDto.getLogin(),
+                loginSignInDto.getPassword(), response);
         return new ResponseEntity(OK);
     }
 
     @RequestMapping(path = "/register", method = POST)
-    public ResponseEntity register(@RequestBody LoginRequestDto loginRequestDto) {
-        authenticationService.register(loginRequestDto.getLogin(), loginRequestDto.getPassword());
+    public ResponseEntity register(@RequestBody @Valid UserRegisterDto userRegisterDto) {
+        authenticationService.register(userRegisterDto);
         return new ResponseEntity(OK);
     }
 

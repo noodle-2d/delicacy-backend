@@ -1,33 +1,20 @@
-package com.delicacycomics.delicacy.entity;
+package com.delicacycomics.delicacy.dto.response;
 
-import javax.persistence.*;
+import com.delicacycomics.delicacy.entity.Order;
+import com.delicacycomics.delicacy.entity.Product;
 
-/**
- * Created by Дмитрий on 9/21/2017.
- */
-@Entity
-@Table(name = "order_items")
-public class OrderItem {
+public class OrderItemDto {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "order_item_id")
     private Long orderItemId;
-
-    @ManyToOne
-    @JoinColumn(name = "product_id")
     private Product product;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id")
     private Order order;
-
     private Integer amount;
 
-    public OrderItem() {
+    public OrderItemDto() {
     }
 
-    public OrderItem(Long orderItemId, Product product, Order order, Integer amount) {
+    public OrderItemDto(Long orderItemId, Product product, Order order, Integer amount) {
         this.orderItemId = orderItemId;
         this.product = product;
         this.order = order;

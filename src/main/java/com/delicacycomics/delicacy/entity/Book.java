@@ -18,7 +18,7 @@ public class Book extends Product {
     @JoinColumn(name = "publisher_local")
     private Subject publisherLocal;
     private String isbn;
-    private String format;
+    private BookFormat format;
     @Column(name = "pages_count")
     private Long pagesCount;
     @ManyToMany
@@ -34,7 +34,7 @@ public class Book extends Product {
 
     public Book(){}
 
-    public Book(String isbn, String format, Long pagesCount) {
+    public Book(String isbn, BookFormat format, Long pagesCount) {
         this.isbn = isbn;
         this.format = format;
         this.pagesCount = pagesCount;
@@ -48,11 +48,11 @@ public class Book extends Product {
         this.isbn = isbn;
     }
 
-    public String getFormat() {
+    public BookFormat getFormat() {
         return format;
     }
 
-    public void setFormat(String format) {
+    public void setFormat(BookFormat format) {
         this.format = format;
     }
 

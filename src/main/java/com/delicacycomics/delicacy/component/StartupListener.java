@@ -8,12 +8,10 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.constraints.Null;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -31,6 +29,8 @@ public class StartupListener {
    private OrderRepository orderRepository;
    @Autowired
    private OrderItemRepository orderItemRepository;
+   @Autowired
+   BCryptPasswordEncoder bCryptPasswordEncoder;
    //@Autowired
    //private PictureRepository pictureRepository;
 
@@ -134,7 +134,7 @@ public class StartupListener {
                 "Теперь лишь Бэтмен может спасти двух своих ближайших друзей от угрожающей им смертельной опасности. Под силу ли ему разорвать порочный круг безумия и кровавого насилия, навечно связавший его с Джокером, прежде чем наступит неизбежный, казалось бы, финал? И когда тайна происхождения короля преступного мира будет наконец раскрыта, не лопнет ли тонкая граница, отделяющая Бэтмена с его безупречным благородством от Джокера с его добровольным делирием?\\n\n" +
                 "В таких своих легендарных работах, как «ХРАНИТЕЛИ» и «V – ЗНАИТ VЕНДЕТТА», современный классик Алан Мур переписал правила супергеройского жанра. «БЭТМЕН: УБИЙСТВЕННАЯ ШУТКА» – это его попытка по новой ответить на вечный вопрос о зарождении величайшего суперзлодея; попытка, после которой вселенная Бэтмена никогда не останется прежней.\\n\n" +
                 "Дополнительные материалы: " +
-                "Предисловие Тима Сэйла, послесловие Брайана Болланда, наброски, раскадровки, иллюстрации Брайана Болланда, примечания «Азбуки».);", 650.00, Long.parseLong("4"), "7-Jun-2013", subjectDCComics, subjectAzbuka, "978-5-389-10977-3", "Твердый переплет", Long.parseLong("42"),authorsBatmanKillingJoke, artisitsBatmanKillingJoke, tagsBatmanKillingJoke, formatter);
+                "Предисловие Тима Сэйла, послесловие Брайана Болланда, наброски, раскадровки, иллюстрации Брайана Болланда, примечания «Азбуки».);", new BigDecimal("650.00"), Long.parseLong("4"), "7-Jun-2013", subjectDCComics, subjectAzbuka, "978-5-389-10977-3", BookFormat.HARDCOVER, Long.parseLong("42"),authorsBatmanKillingJoke, artisitsBatmanKillingJoke, tagsBatmanKillingJoke, formatter);
         ArrayList authorsMaus = new ArrayList();
         authorsMaus.add(subjectArtSpigelman);
         ArrayList artisitsMaus = new ArrayList();
@@ -142,7 +142,7 @@ public class StartupListener {
         ArrayList tagsMaus = new ArrayList();
         tagsMaus.add(tagDrama);
         tagsMaus.add(tagMustRead);
-        Book bookMaus = insertBook("Маус", subjectComicsOnRussianLanguage, "«Маус» Арта Шпигельмана – единственный графический роман, получивший престижную Пулитцеровскую премию. Автору удалось, казалось бы, невозможное – рассказать историю Холокоста в форме комикса. Владек Шпигельман, отец Арта, рассказывает сыну, как прошел через гетто, Освенцим и «марш смерти» на Дахау. Но «Маус» – это и глубоко личная история автора, его попытка разобраться в своих непростых отношениях с семьей. На стыке этих историй и рождается уникальный текст, который без упрощений и пафоса рассказывает об одной из самых чудовищных трагедий XX века. На стыке этих историй и рождается уникальный текст, который без упрощений и пафоса рассказывает об одной из самых чудовищных трагедий XX века.", 740.00, Long.parseLong("1"), "07-Jul-2014", null, subjectBoomkniga, "978-5-17-080250-0", "Твердый переплет", Long.parseLong("296"), authorsMaus, artisitsMaus, tagsMaus, formatter);
+        Book bookMaus = insertBook("Маус", subjectComicsOnRussianLanguage, "«Маус» Арта Шпигельмана – единственный графический роман, получивший престижную Пулитцеровскую премию. Автору удалось, казалось бы, невозможное – рассказать историю Холокоста в форме комикса. Владек Шпигельман, отец Арта, рассказывает сыну, как прошел через гетто, Освенцим и «марш смерти» на Дахау. Но «Маус» – это и глубоко личная история автора, его попытка разобраться в своих непростых отношениях с семьей. На стыке этих историй и рождается уникальный текст, который без упрощений и пафоса рассказывает об одной из самых чудовищных трагедий XX века. На стыке этих историй и рождается уникальный текст, который без упрощений и пафоса рассказывает об одной из самых чудовищных трагедий XX века.", new BigDecimal("740.00"), Long.parseLong("1"), "07-Jul-2014", null, subjectBoomkniga, "978-5-17-080250-0", BookFormat.HARDCOVER, Long.parseLong("296"), authorsMaus, artisitsMaus, tagsMaus, formatter);
         ArrayList authorsSaga = new ArrayList();
         authorsSaga.add(subjectBraianVon);
         ArrayList artisitsSaga = new ArrayList();
@@ -151,7 +151,7 @@ public class StartupListener {
         tagsSaga.add(tagAction);
         tagsSaga.add(tagMustRead);
         Book bookSaga = insertBook("Сага. Книга 1", subjectComicsOnRussianLanguage, "Алана и Марко принадлежат к разным расам. Бесконечная галактическая война должна была развести их по разные стороны баррикад, но они полюбили друг друга и теперь вынуждены скитаться, пытаясь отыскать в галактике мирный уголок для себя и своей новорожденной дочери. \"Сага\" - это увлекательный сюжет, приключения, любовь и огромная удивительная вселенная, в которой возможно буквально всё.\\n\n" +
-               "Доп. информация: в книге собраны выпуски Saga #1-6.", 650.00, Long.parseLong("1"), "28-Jul-2014", subjectImage, subjectXlMedia, "978-5-91996-047-8", "Твердый переплет", Long.parseLong("172"), authorsSaga, artisitsSaga, tagsSaga, formatter);
+               "Доп. информация: в книге собраны выпуски Saga #1-6.", new BigDecimal("650.00"), Long.parseLong("1"), "28-Jul-2014", subjectImage, subjectXlMedia, "978-5-91996-047-8", BookFormat.HARDCOVER, Long.parseLong("172"), authorsSaga, artisitsSaga, tagsSaga, formatter);
         ArrayList authorsWalkingDead = new ArrayList();
         authorsWalkingDead.add(subjectRobertKirkman);
         ArrayList artisitsWalkingDead = new ArrayList();
@@ -168,7 +168,7 @@ public class StartupListener {
                 "Исчезли правительства, магазины, доставка почты, кабельное телевидение.\\n\n" +
                 "В мире, где правят мертвые, мы наконец вынуждены начать жить.\\n\n" +
                 "Доп. информация:\\n\n" +
-                "В книге собраны выпуски The Walking Dead ##1-6.", 350.00, Long.parseLong("3"), "25-Sep-2016", subjectImage, subjectKomilfo, "978-5-990522411", "Твердый переплет", Long.parseLong("144"), authorsWalkingDead, artisitsWalkingDead, tagsWalkingDead, formatter);
+                "В книге собраны выпуски The Walking Dead ##1-6.", new BigDecimal("350.00"), Long.parseLong("3"), "25-Sep-2016", subjectImage, subjectKomilfo, "978-5-990522411", BookFormat.TRADEPAPERBOOK, Long.parseLong("144"), authorsWalkingDead, artisitsWalkingDead, tagsWalkingDead, formatter);
         ArrayList authorsHouseM = new ArrayList();
         authorsHouseM.add(subjectBrayanBendis);
         ArrayList artisitsHouseM = new ArrayList();
@@ -184,13 +184,13 @@ public class StartupListener {
               "В мир, слишком совершенный, чтобы быть правдой. В мир, который никогда не был правдой... но один день навеки его изменит.\\n\\n\n" +
               "Добро пожаловать в карточный домик, воздвигнутый на пепелище Мстителей. И пока тайна Дня М не будет раскрыта, реальность никогда не станет прежней.\\n\\n\n" +
               "«День М» – работа сценариста Брайана Майкла Бендиса («Новые Мстители», «Современный Человек-Паук», «Люди Икс») и художника Оливье Койпеля («Мстители», «Осада»), ставшая главным комикс-хитом 2005 года. Это роскошное полотно, на котором личные переживания героев гармонично сочетаются с грандиозными битвами. Действие «Дня М» происходит после распада Мстителей и служит одним из ключей к уже ставшему классическим сюжету «Гражданская Война». На страницах комикса вы встретите всех ключевых героев вселенной Marvel, включая Мстителей, Людей Икс и многих других.\\n\\n\n" +
-              "В книгу входят комиксы «День М» #1-8.", 380.00, Long.parseLong("5"), "07-Jul-2017", subjectMarvel, subjectJellyfishJam, "978-5-9909878-1-4", "Мягкий переплет", Long.parseLong("228"), authorsHouseM, artisitsHouseM, tagsHouseM, formatter);
+              "В книгу входят комиксы «День М» #1-8.", new BigDecimal("380.00"), Long.parseLong("5"), "07-Jul-2017", subjectMarvel, subjectJellyfishJam, "978-5-9909878-1-4", BookFormat.TRADEPAPERBOOK, Long.parseLong("228"), authorsHouseM, artisitsHouseM, tagsHouseM, formatter);
 
         ArrayList tagsSoyuzniki = new ArrayList();
         tagsSoyuzniki.add(tagAction);
         Book bookSoyuznkiki = insertBook("Союзники №7", subjectComicsOnRussianLanguage, "Естественный отбор. Часть 3\"\\n\\n\n" +
 
-                "«Асулбург» уже давно населяют только призраки когда-то живших и сражавшихся здесь чудовищ... Не считая одного нового чудовища, устроившего охоту на всех, кому не повезло оказаться в крепости!", 60.00, Long.parseLong("7"), "29-Jul-2017", subjectBubble, subjectBubble, null, "Сингл", Long.parseLong("24"), null, null, tagsSoyuzniki, formatter);
+                "«Асулбург» уже давно населяют только призраки когда-то живших и сражавшихся здесь чудовищ... Не считая одного нового чудовища, устроившего охоту на всех, кому не повезло оказаться в крепости!", new BigDecimal("60.00"), Long.parseLong("7"), "29-Jul-2017", subjectBubble, subjectBubble, null, BookFormat.SINGLE, Long.parseLong("24"), null, null, tagsSoyuzniki, formatter);
         ArrayList tagsHawkeye = new ArrayList();
         tagsHawkeye.add(tagAction);
         tagsHawkeye.add(tagMarvel);
@@ -204,7 +204,7 @@ public class StartupListener {
               "Клинту хватает проблем с бывшей девушкой, женой, текущей «подружкой» и рыжей дамочкой с машиной его мечты. Не говоря о недавно купленном им здании, армии упырей в трениках, которые хотят его вернуть, и невероятной собаке, чующей за версту и убийства, и пиццу. А еще тут Мадам Маска, клоун-убийца и нищеброд-брательник Клинта, Барни. С таким набором битва Мстителей против Таноса покажется невинным пикником. Чаша терпения Кейт переполняется, и она уезжает. Говорят, Лос-Анджелес в это время года просто сказка. Но что об этом думает пес? И кстати, вы когда-нибудь представляли, как может выглядеть комикс на языке жестов?\\n\\n\n" +
               "Получившая «Айснера» история приключений Хоукгая, Кейти-Кейт и Пицца-Пса по имени Счастливчик. Признай, бро, ты сорвал мишень.\\n\n" +
               "Доп. информация:\\n\n" +
-              "В книге собраны выпуски: серия Hawkeye (V.2), Annual #1 и Young Avengers Presents #6.", 1500.00, Long.parseLong("8"), "10-Jun-2017", subjectMarvel, subjectKomilfo, "978-5-389-10977-3", "Твердый переплет", Long.parseLong("144"), authorsHawkeye, artisitsHawkeye, tagsHawkeye, formatter);
+              "В книге собраны выпуски: серия Hawkeye (V.2), Annual #1 и Young Avengers Presents #6.", new BigDecimal("1500.00"), Long.parseLong("8"), "10-Jun-2017", subjectMarvel, subjectKomilfo, "978-5-389-10977-3", BookFormat.COLLECTORSEDITION, Long.parseLong("144"), authorsHawkeye, artisitsHawkeye, tagsHawkeye, formatter);
         ArrayList authorsJoker = new ArrayList();
         authorsJoker.add(subjectBrayanAzarello);
         ArrayList artisitsJoker = new ArrayList();
@@ -217,12 +217,12 @@ public class StartupListener {
         tagsJoker.add(tagSuperheroic);
         Book bookJoker = insertBook("Джокер", subjectComicsOnRussianLanguage, "Джокер выбрался из психушки, но ему, несмотря на улыбку, совсем не весело. За время его отсутствия бывшие подчиненные растащили хозяйский пирог до последней крошки, а самого Джокера списали со счетов, решив, что тот уже не вернется. Однако Джокер снова на свободе и пуще прежнего жаждет утопить Готэм в крови.\\n\n" +
               "В долгих блужданиях по сумеркам души ему составят компанию такие персонажи, как Пингвин, Двуликий, Убийца Крок, Харли Квинн, Загадочник и, конечно же, Бэтмен... и да поможет им всем Господь.\\n\n" +
-              "История Джокера, рассказанная от лица его верного, хоть и наивного подручного по имени Джонни Фрост, – классический криминальный нуар, зубодробительный трип по городу среди залитых дождем улиц, грязного белья и сплошных разочарований.", 820.00, Long.parseLong("3"), "15-May-2017", subjectDCComics, subjectAzbuka, "978-5-389-10977-3", "Твёрдый переплёт", Long.parseLong("144"), authorsJoker, artisitsJoker, tagsJoker, formatter);
+              "История Джокера, рассказанная от лица его верного, хоть и наивного подручного по имени Джонни Фрост, – классический криминальный нуар, зубодробительный трип по городу среди залитых дождем улиц, грязного белья и сплошных разочарований.", new BigDecimal("820.00"), Long.parseLong("3"), "15-May-2017", subjectDCComics, subjectAzbuka, "978-5-389-10977-3", BookFormat.HARDCOVER, Long.parseLong("144"), authorsJoker, artisitsJoker, tagsJoker, formatter);
 
         ArrayList tagsRickAndMorty = new ArrayList();
         tagsRickAndMorty.add(tagSciFi);
         tagsRickAndMorty.add(tagComedy);
-        Book bookRickAndMorty = insertBook("Рик и Морти: Полное издание. Том 1", subjectComicsOnRussianLanguage, "Рик и Морти: Полное издание. Том 1', 54, 'Если вы следите за невероятными приключениями бедолаги Морти и его деда-алкоголика, ученого и по совместительству межгалактического преступника Рика Санчеза и устали ждать выхода третьего сезона, то эта книга определенно поможет вам скоротать время в ожидании. Приготовьтесь к новой порции безумия, но теперь уже в комиксах, потому что таких историй вы еще не слышали и не видели! Сюжет комикса не дублирует мультсериал и не оставит равнодушным ни одного любителя отборного интеллектуально-трешёвого юмора и научной фантастики.", 890.00, Long.parseLong("3"), "30-May-2016", null, subjectKomilfo, null, "Твердый переплет", Long.parseLong("400"), null, null, tagsRickAndMorty, formatter);
+        Book bookRickAndMorty = insertBook("Рик и Морти: Полное издание. Том 1", subjectComicsOnRussianLanguage, "Рик и Морти: Полное издание. Том 1', 54, 'Если вы следите за невероятными приключениями бедолаги Морти и его деда-алкоголика, ученого и по совместительству межгалактического преступника Рика Санчеза и устали ждать выхода третьего сезона, то эта книга определенно поможет вам скоротать время в ожидании. Приготовьтесь к новой порции безумия, но теперь уже в комиксах, потому что таких историй вы еще не слышали и не видели! Сюжет комикса не дублирует мультсериал и не оставит равнодушным ни одного любителя отборного интеллектуально-трешёвого юмора и научной фантастики.", new BigDecimal("890.00"), Long.parseLong("3"), "30-May-2016", null, subjectKomilfo, null, BookFormat.HARDCOVER, Long.parseLong("400"), null, null, tagsRickAndMorty, formatter);
         ArrayList authorsYLastMan2 = new ArrayList();
         authorsYLastMan2.add(subjectBraianVon);
         ArrayList artisitsYLastMan2 = new ArrayList();
@@ -231,7 +231,7 @@ public class StartupListener {
         tagsYLastMan2.add(tagMustRead);
        Book bookYLastMan2 = insertBook("Y: Последний мужчина. Книга 2", subjectComicsOnRussianLanguage, "В 2002 году мир навсегда изменился. Повсюду на земле все мужчины и мальчики, все млекопитающие с Y-хромосомой разом упали и умерли. Из-за гибели более чем половины человечества шестеренки общества застопорились. Теперь перед женщинами стоит задача: собрать мир по частям и уберечь цивилизацию от полного коллапса.\\n\n" +
                "«Гендерцид», впрочем, оказался не вполне тотальным. По неведомым причинам молодой человек Йорик Браун и его ручной капуцин Амперсанд остались живы. За одну ночь безвестный юнец оказался главным человеком на планете – возможным ключом к загадке гендерноспецифической эпидемии.\\n\n" +
-               "А самый важный для самого Йорика человек находится за 10 000 миль от него, и юноша готов на все, чтобы ее отыскать. Однако пускаясь в путь по миру, где остались одни женщины, парнишка и обезьянка обнаруживают, что за ними охотятся – с самыми разными целями.\\n", 860.00, Long.parseLong("2"), "31-May-2017", subjectVertigo, subjectAzbuka, "978-5-389-12021-1", "Твердый переплет", Long.parseLong("144"), authorsYLastMan2, artisitsYLastMan2, tagsYLastMan2, formatter);
+               "А самый важный для самого Йорика человек находится за 10 000 миль от него, и юноша готов на все, чтобы ее отыскать. Однако пускаясь в путь по миру, где остались одни женщины, парнишка и обезьянка обнаруживают, что за ними охотятся – с самыми разными целями.\\n", new BigDecimal("860.00"), Long.parseLong("2"), "31-May-2017", subjectVertigo, subjectAzbuka, "978-5-389-12021-1", BookFormat.HARDCOVER, Long.parseLong("144"), authorsYLastMan2, artisitsYLastMan2, tagsYLastMan2, formatter);
         ArrayList authorsOldManLogan = new ArrayList();
         authorsOldManLogan.add(subjectMarkMillar);
         ArrayList artisitsOldManLogan = new ArrayList();
@@ -243,7 +243,7 @@ public class StartupListener {
         tagsOldManLogan.add(tagMustRead);
        Book bookOldManLogan = insertBook("Росомаха. Старик Логан", subjectComicsOnRussianLanguage, "Когда-то Марк Миллар («Мордобой», «Особо опасен») уже делал историю про Росомаху – «Враг государства», но на этот раз он превзошел самого себя. В этом ему помог его бессменный «брат по оружию» в «Гражданской Войне» – художник Стив Макнивен.\\n\n" +
                "Смешав супергероику далекой антиутопии мира «Людей Икс: Дней минувшего будущего» с диким постапокалиптическим миром «Безумного Макса» и трагическим путешествием героя, напоминающего архетипы Клинта Иствуда, Марк Миллар создал комикс о Росомахе, который находится на распутье и не знает, кто он теперь и кем он хочет быть.\\n\n" +
-               "Безумные экшн-сцены Миллара и динамичная раскадровка Макнивена заставят вас с нетерпением перелистывать страницы, пока Росомаха не прикончит последнего злодея в своем бесконечном поиске мирного существования.\\n", 400.00, Long.parseLong("3"), "26-Aug-2015", subjectMarvel, subjectKomilfo, "978-5-91339-329-6", "Мягкий переплет", Long.parseLong("224"), authorsOldManLogan, artisitsOldManLogan,tagsOldManLogan, formatter);
+               "Безумные экшн-сцены Миллара и динамичная раскадровка Макнивена заставят вас с нетерпением перелистывать страницы, пока Росомаха не прикончит последнего злодея в своем бесконечном поиске мирного существования.\\n", new BigDecimal("400.00"), Long.parseLong("3"), "26-Aug-2015", subjectMarvel, subjectKomilfo, "978-5-91339-329-6", BookFormat.TRADEPAPERBOOK, Long.parseLong("224"), authorsOldManLogan, artisitsOldManLogan,tagsOldManLogan, formatter);
         ArrayList authorsFlash4 = new ArrayList();
         authorsFlash4.add(subjectBraianBuchelatto);
         ArrayList tagsFlash4 = new ArrayList();
@@ -253,7 +253,7 @@ public class StartupListener {
        Book bookFlash4 = insertBook("Флэш. Книга 4. Реверс, или Обратный ход", subjectComicsOnRussianLanguage, "Став Флэшем, Барри Аллен получил доступ к невероятной энергии Силы Скорости, благодаря которой может двигаться, думать и действовать с поразительной быстротой. Но он не просто расходует Силу Скорости: с каждым шагом он ее вырабатывает. Словно живой генератор, он служит источником энергии, которая двигает время вперед.\\n\n" +
                "Но появляется враг, который стремится обратить в прах все труды Флэша.\\n\n" +
                "По улицам Централ-сити рыщет молниеносный убийца, нацелившийся на каждого, кого коснулась Сила Скорости, – а значит, друзья Флэша превращаются в потенциальные мишени. Преступник носит перевернутый символ Флэша и, похоже, подпитывается энергией своих жертв. Но каковы его цели?\\n\n" +
-               "Кто же он, Обратный Флэш? Каким образом связан с Силой Скорости – и с Барри Алленом? И сможет ли Флэш остановить его прежде, чем будет поздно?", 850.00, Long.parseLong("0"), "08-Feb-2017", subjectDCComics, subjectAzbuka, "978-5-389-12088-4", "Твердый переплет", Long.parseLong("176"), authorsFlash4, null, tagsFlash4, formatter);
+               "Кто же он, Обратный Флэш? Каким образом связан с Силой Скорости – и с Барри Алленом? И сможет ли Флэш остановить его прежде, чем будет поздно?", new BigDecimal("850.00"), Long.parseLong("0"), "08-Feb-2017", subjectDCComics, subjectAzbuka, "978-5-389-12088-4", BookFormat.HARDCOVER, Long.parseLong("176"), authorsFlash4, null, tagsFlash4, formatter);
         ArrayList authorsBatmanLongWictory = new ArrayList();
         authorsBatmanLongWictory.add(subjectJeffLoeb);
         authorsBatmanLongWictory.add(subjectTimSale);
@@ -265,20 +265,20 @@ public class StartupListener {
         tagsBatmanLongWictory.add(tagSuperheroic);
        Book bookBatmanLongWictory = insertBook("Бэтмен. Темная Победа", subjectComicsOnRussianLanguage, "На заре своей карьеры Темного Рыцаря Бэтмен пытается выследить неуловимого убийцу копов по кличке Палач, прежде чем тот нанесет очередной удар. Единственный намек на личность преступника – листок с детской игрой, приколотый к телам жертв. В качестве главных подозреваемых выступает целая галерея злодеев: Двуликий, Джокер, Загадочник, Женщина-Кошка. Даже полиции во главе с недавно назначенным комиссаром Гордоном доверять нельзя.\\n\n" +
                "Чтобы разрешить загадку, Бэтмену придется заручиться помощью с самой неожиданной стороны. Он возьмет в напарники осиротевшего мальчика, который навсегда изменит его жизнь. Они станут известны как Бэтмен и Робин. Их история перед вами.\\n\\n\n" +
-               "В качестве авторов книги выступает знаменитый тандем: лауреаты премии Айснера Джеф Лоэб и Тим Сэйл («Супермен на все времена», «Бэтмен: Долгий Хэллоуин»). Абсолютное издание включает оригинальную серию из 0-13 выпусков, интервью Джефа Лоэба, вступительные статьи Тима Сэйла и сценариста кинотрилогии о Бэтмене Дэвида С. Гойера, а также множество набросков и эскизов.", 1010.00, Long.parseLong("2"), "10-Feb-2017", subjectDCComics, subjectAzbuka, "978-5-389-10782-3", "Твердый переплет", Long.parseLong("408"), authorsBatmanLongWictory, null, tagsBatmanLongWictory, formatter);
+               "В качестве авторов книги выступает знаменитый тандем: лауреаты премии Айснера Джеф Лоэб и Тим Сэйл («Супермен на все времена», «Бэтмен: Долгий Хэллоуин»). Абсолютное издание включает оригинальную серию из 0-13 выпусков, интервью Джефа Лоэба, вступительные статьи Тима Сэйла и сценариста кинотрилогии о Бэтмене Дэвида С. Гойера, а также множество набросков и эскизов.", new BigDecimal("1010.00"), Long.parseLong("2"), "10-Feb-2017", subjectDCComics, subjectAzbuka, "978-5-389-10782-3", BookFormat.HARDCOVER, Long.parseLong("408"), authorsBatmanLongWictory, null, tagsBatmanLongWictory, formatter);
         ArrayList tagsSabretooth = new ArrayList();
         tagsSabretooth.add(tagAction);
         tagsSabretooth.add(tagMarvel);
         tagsSabretooth.add(tagSuperheroic);
-       Attribute attributeSabretooth = insertAttribute("Фигурка Sabretooth/Саблезубый («Funko POP!», «Marvel X-Men»)", subjectFiguresToysAndAttribute, "Коллекционная фигурка Саблезубого из \"Людей Икс", 1300.00, Long.parseLong("1"), "12-Nov-2016", Long.parseLong("20"), subjectFunkoPop, "Marvel", "пластмасса", tagsSabretooth, formatter);
-       Attribute attributeStickers = insertAttribute("Стикеры Marvel (stickeriscoming)", subjectStickers, "Набор наклеек с супергероями", 150.00, Long.parseLong("5"), "28-May-2017", Long.parseLong("20"), subjectStickeriscoming, null, "Виниловая бумага", null, formatter);
+       Attribute attributeSabretooth = insertAttribute("Фигурка Sabretooth/Саблезубый («Funko POP!», «Marvel X-Men»)", subjectFiguresToysAndAttribute, "Коллекционная фигурка Саблезубого из \"Людей Икс", new BigDecimal("1300.00"), Long.parseLong("1"), "12-Nov-2016", Long.parseLong("20"), subjectFunkoPop, "Marvel", "пластмасса", tagsSabretooth, formatter);
+       Attribute attributeStickers = insertAttribute("Стикеры Marvel (stickeriscoming)", subjectStickers, "Набор наклеек с супергероями", new BigDecimal("150.00"), Long.parseLong("5"), "28-May-2017", Long.parseLong("20"), subjectStickeriscoming, null, "Виниловая бумага", null, formatter);
        ArrayList tagsAttributeBatman = new ArrayList();
        tagsAttributeBatman.add(tagAction);
        tagsAttributeBatman.add(tagBatman);
        tagsAttributeBatman.add(tagJoker);
        tagsAttributeBatman.add(tagDc);
        tagsAttributeBatman.add(tagSuperheroic);
-       Attribute attributeBatman = insertAttribute("Фигурка «Бэтмен на гаргулье»", subjectFiguresToysAndAttribute, "Коллекционная фигурка Бэтмена", 2000.00, Long.parseLong("1"), "15-Feb-2017", null, null, null, "Пластмасса", tagsAttributeBatman, formatter);
+       Attribute attributeBatman = insertAttribute("Фигурка «Бэтмен на гаргулье»", subjectFiguresToysAndAttribute, "Коллекционная фигурка Бэтмена", new BigDecimal("2000.00"), Long.parseLong("1"), "15-Feb-2017", null, null, null, "Пластмасса", tagsAttributeBatman, formatter);
        ArrayList authorsСhrononauts = new ArrayList();
        authorsСhrononauts.add(subjectMarkMillar);
        ArrayList artisitsChrononauts = new ArrayList();
@@ -287,7 +287,7 @@ public class StartupListener {
        tagsChrononauts.add(tagAction);
        tagsChrononauts.add(tagSciFi);
        tagsChrononauts.add(tagComedy);
-       Book bookChrononauts = insertBook("Хрононавты", subjectComicsOnRussianLanguage, "Доктор Куинн и доктор Райли — учёные, но не такие, какими мы привыкли видеть учёных. Это не угрюмые старики в белых халатах, а молодые люди, полные жизни и амбиций. Они строят машину времени (в рамках государственной программы США, конечно же, не у себя же в гараже её строить). ", 350.00, Long.parseLong("2"), "07-Feb-2017", subjectImage, subjectKomilfo, "978-5-389-12088-4", "Мягкий переплет", Long.parseLong("112"), authorsСhrononauts, artisitsChrononauts, tagsChrononauts, formatter);
+       Book bookChrononauts = insertBook("Хрононавты", subjectComicsOnRussianLanguage, "Доктор Куинн и доктор Райли — учёные, но не такие, какими мы привыкли видеть учёных. Это не угрюмые старики в белых халатах, а молодые люди, полные жизни и амбиций. Они строят машину времени (в рамках государственной программы США, конечно же, не у себя же в гараже её строить). ", new BigDecimal("350.00"), Long.parseLong("2"), "07-Feb-2017", subjectImage, subjectKomilfo, "978-5-389-12088-4", BookFormat.TRADEPAPERBOOK, Long.parseLong("112"), authorsСhrononauts, artisitsChrononauts, tagsChrononauts, formatter);
        ArrayList authorsValerian = new ArrayList();
        authorsValerian.add(subjectPyerKristen);
        ArrayList artisitsValerian = new ArrayList();
@@ -296,40 +296,38 @@ public class StartupListener {
        tagsValerian.add(tagAction);
        tagsValerian.add(tagSciFi);
        Book bookValerian = insertBook("Валериан: Полное собрание. Книга 1", subjectComicsOnRussianLanguage, "Валериан и Лорелин, придуманные талантливыми Пьером Кристеном и Жан-Клодом Мезьером, впервые появились на страницах журнала «Pilote» в 1967 году. Эти оригинальные истории сразу же стали звездами первой величины на небосклоне научной фантастики.\\n\\n\n" +
-               "В книгу включены дополнительные материалы: кадры из фильма, фотографии со съемочной площадки, интервью с режиссером и многое другое. Серия выпущена по образцу оригинальных сборников издательства «Dargaud» – омнибусами по три книги в одном томе увеличенного формата.", 860.00, Long.parseLong("3"), "19-Jul-2017", null, subjectAzbuka, "978-5-389-12719-7", "Твердый переплет", Long.parseLong("160"), authorsValerian, artisitsValerian, tagsValerian, formatter);
+               "В книгу включены дополнительные материалы: кадры из фильма, фотографии со съемочной площадки, интервью с режиссером и многое другое. Серия выпущена по образцу оригинальных сборников издательства «Dargaud» – омнибусами по три книги в одном томе увеличенного формата.", new BigDecimal("860.00"), Long.parseLong("3"), "19-Jul-2017", null, subjectAzbuka, "978-5-389-12719-7", BookFormat.HARDCOVER, Long.parseLong("160"), authorsValerian, artisitsValerian, tagsValerian, formatter);
        ArrayList tagsSpiderEnciclopedia = new ArrayList();
        tagsSpiderEnciclopedia.add(tagAction);
        tagsSpiderEnciclopedia.add(tagMarvel);
        tagsSpiderEnciclopedia.add(tagSuperheroic);
-       Book bookSpiderEnciclopedia = insertBook("Человек-Паук. Энциклопедия персонажей", subjectCyclopaediasAndArtbooks, null, 1650.00, Long.parseLong("1"), "25-Jul-2017", subjectMarvel, subjectEksmo, null, "Твердый переплет", Long.parseLong("415"), null, null, tagsSpiderEnciclopedia, formatter);
+       Book bookSpiderEnciclopedia = insertBook("Человек-Паук. Энциклопедия персонажей", subjectCyclopaediasAndArtbooks, null, new BigDecimal("1650.00"), Long.parseLong("1"), "25-Jul-2017", subjectMarvel, subjectEksmo, null, BookFormat.COLLECTORSEDITION, Long.parseLong("415"), null, null, tagsSpiderEnciclopedia, formatter);
         ArrayList authorsMassEffectAndromeda = new ArrayList();
         authorsMassEffectAndromeda.add(subjectJasonHuf);
         ArrayList tagsMassEffectAndromeda = new ArrayList();
         tagsMassEffectAndromeda.add(tagSciFi);
-       Book bookMassEffectAndromeda = insertBook("Mass Effect. Андромеда. Восстание на \"Нексусе", subjectBooks, null, 350.00, Long.parseLong("1"), "25-Jun-2017", null, subjectAzbukaAttikus, null, "Твердый переплет", Long.parseLong("344"), authorsMassEffectAndromeda, null, tagsMassEffectAndromeda, formatter);
+       Book bookMassEffectAndromeda = insertBook("Mass Effect. Андромеда. Восстание на \"Нексусе", subjectBooks, null, new BigDecimal("350.00"), Long.parseLong("1"), "25-Jun-2017", null, subjectAzbukaAttikus, null, BookFormat.HARDCOVER, Long.parseLong("344"), authorsMassEffectAndromeda, null, tagsMassEffectAndromeda, formatter);
 
        Order orderFirstWithCustomer = insertOrder(userCustomerExample, "02-Feb-2018", UserStatus.ACTIVE, "Что-то там про заказ", UUID.randomUUID().toString(), formatter);
        Order orderSecondWithUnauthorized = insertOrder(userUnauthorizedExample, "03-May-2018", UserStatus.ACTIVE, "Какой-то заказ", UUID.randomUUID().toString(), formatter);
        Order orderThirdWithCustomer = insertOrder(userCustomerExample, "05-Jun-2018", UserStatus.ACTIVE, "Какое-то описание", UUID.randomUUID().toString(), formatter);
        Order orderFourthWithUnauthorized = insertOrder(userUnauthorizedExample, "07-Jun-2018", UserStatus.ACTIVE, "Пометочка про заказ", UUID.randomUUID().toString(), formatter);
 
-       OrderItem orderItemFirstKillingJoke = insertOrderItem(bookBatmanKillingJoke, orderFirstWithCustomer, Long.parseLong("1"));
-       OrderItem orderItemFirstLongWictory = insertOrderItem(bookBatmanLongWictory, orderFirstWithCustomer, Long.parseLong("1"));
-       OrderItem orderItemFirstStickers = insertOrderItem(attributeStickers, orderFirstWithCustomer, Long.parseLong("3"));
-       OrderItem orderItemSecondHouse = insertOrderItem(bookHouseM, orderSecondWithUnauthorized, Long.parseLong("1"));
-       OrderItem orderItemSecondSabretooth = insertOrderItem(attributeSabretooth, orderSecondWithUnauthorized, Long.parseLong("1"));
-       OrderItem orderItemSecondBatman = insertOrderItem(attributeBatman, orderSecondWithUnauthorized, Long.parseLong("1"));
-       OrderItem orderItemThirdRickAndMorty = insertOrderItem(bookRickAndMorty, orderThirdWithCustomer, Long.parseLong("1"));
-       OrderItem orderItemFourth = insertOrderItem(bookMaus, orderFourthWithUnauthorized, Long.parseLong("1"));
+       OrderItem orderItemFirstKillingJoke = insertOrderItem(bookBatmanKillingJoke, orderFirstWithCustomer, 1);
+       OrderItem orderItemFirstLongWictory = insertOrderItem(bookBatmanLongWictory, orderFirstWithCustomer, 1);
+       OrderItem orderItemFirstStickers = insertOrderItem(attributeStickers, orderFirstWithCustomer, 3);
+       OrderItem orderItemSecondHouse = insertOrderItem(bookHouseM, orderSecondWithUnauthorized, 1);
+       OrderItem orderItemSecondSabretooth = insertOrderItem(attributeSabretooth, orderSecondWithUnauthorized, 1);
+       OrderItem orderItemSecondBatman = insertOrderItem(attributeBatman, orderSecondWithUnauthorized, 1);
+       OrderItem orderItemThirdRickAndMorty = insertOrderItem(bookRickAndMorty, orderThirdWithCustomer, 1);
+       OrderItem orderItemFourth = insertOrderItem(bookMaus, orderFourthWithUnauthorized, 1);
 
     }
 
    private User insertUser(String loginContent, String passwordHashContent, String nameContent, String surnameContent, String phoneNumberContent, String ipAddressContent, String lastVisitedDate, UserStatus StatusContent, UserRole roleContent, String registrationDateContent, String emailContent, String linkContent, SimpleDateFormat formatter) {
         User user = new User();
         user.setLogin(loginContent);
-        if (passwordHashContent != null) {
-            passwordHashContent = org.apache.commons.codec.digest.DigestUtils.sha256Hex(passwordHashContent);
-        }
+        passwordHashContent = bCryptPasswordEncoder.encodePassword(passwordHashContent);
         user.setPasswordHash(passwordHashContent);
         user.setName(nameContent);
         user.setSurname(surnameContent);
@@ -369,7 +367,7 @@ public class StartupListener {
         return subject;
     }
 
-   private Book insertBook(String titleContent, Subject typeContent, String descriptionContent, Double priceContent, Long remainderContent, String dateContent, Subject publisherContent, Subject publisherLocalContent, String isbnContent, String formatContent, Long pagesCountContent, ArrayList<Subject> authorsContent, ArrayList<Subject> artistsContent, ArrayList<Tag> tagsContent, SimpleDateFormat formatter) {
+   private Book insertBook(String titleContent, Subject typeContent, String descriptionContent, BigDecimal priceContent, Long remainderContent, String dateContent, Subject publisherContent, Subject publisherLocalContent, String isbnContent, BookFormat formatContent, Long pagesCountContent, ArrayList<Subject> authorsContent, ArrayList<Subject> artistsContent, ArrayList<Tag> tagsContent, SimpleDateFormat formatter) {
         Book book = new Book();
         book.setTitle(titleContent);
         book.setType(typeContent);
@@ -393,7 +391,7 @@ public class StartupListener {
         return book;
   }
 
-   private Attribute insertAttribute(String titleContent, Subject typeContent, String descriptionContent, Double priceContent, Long remainderContent, String dateContent, Long heightContent, Subject manufacturerContent, String seriesContent, String materialContent, ArrayList<Tag> tagsContent, SimpleDateFormat formatter) {
+   private Attribute insertAttribute(String titleContent, Subject typeContent, String descriptionContent, BigDecimal priceContent, Long remainderContent, String dateContent, Long heightContent, Subject manufacturerContent, String seriesContent, String materialContent, ArrayList<Tag> tagsContent, SimpleDateFormat formatter) {
         Attribute attribute = new Attribute();
         attribute.setTitle(titleContent);
         attribute.setType(typeContent);
@@ -429,7 +427,7 @@ public class StartupListener {
        return order;
    }
 
-   private  OrderItem insertOrderItem(Product productContent, Order orderContent, Long amountContent){
+   private  OrderItem insertOrderItem(Product productContent, Order orderContent, Integer amountContent){
         OrderItem orderItem = new OrderItem();
         orderItem.setProduct(productContent);
         orderItem.setOrder(orderContent);

@@ -1,9 +1,6 @@
-package com.delicacycomics.delicacy.dto.response;
+package com.delicacycomics.delicacy.dto.request;
 
-import com.delicacycomics.delicacy.entity.SubjectType;
-
-public class SubjectDto {
-
+public class AddSubjectDto {
     private Long id;
     private String name;
     private String description;

@@ -1,6 +1,7 @@
 package com.delicacycomics.delicacy.entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +19,7 @@ abstract public class Product {
     @JoinColumn(name = "type")
     private Subject type;
     private String description;
-    private Double price;
+    private BigDecimal price;
     @Temporal(TemporalType.DATE)
     private Date date;
     private Long remainder;
@@ -31,7 +32,7 @@ abstract public class Product {
 
     protected Product() { }
 
-    public Product(String title, String description, Double price, Date date, Long remainder) {
+    public Product(String title, String description, BigDecimal price, Date date, Long remainder) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -59,11 +60,11 @@ abstract public class Product {
         this.title = title;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

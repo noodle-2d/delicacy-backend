@@ -11,6 +11,8 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+
 @Aspect
 @Component
 public class SecureAdvice {
@@ -21,17 +23,29 @@ public class SecureAdvice {
     @Around("@annotation(Secure)")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
         UserData userData = authenticationService.getCurrentUserData();
-        UserRole currentUserRole = userData.getRole();
 
+        if (userData != null) {
+        UserRole currentUserRole = userData.getRole();
         Secure secure = ((MethodSignature)joinPoint.getSignature())
                 .getMethod().getAnnotation(Secure.class);
-        UserRole requiredUserRole = secure.role();
-
-        if (currentUserRole.ordinal() < requiredUserRole.ordinal()) {
-            throw new ForbiddenException("User role required: " + requiredUserRole);
+        System.out.println("Secure = " + secure.toString());
+        UserRole[] requiredUserRoles = secure.role();
+            if (!Arrays.asList(requiredUserRoles).contains(currentUserRole)) {
+                throw new ForbiddenException("Another user role required");
+            }
+        } else {
+            throw new ForbiddenException("Need to authorize for this action");
         }
 
+        //UserRole requiredUserRole = secure.role();     old version before totsamiy edit ;)
+        //
+        //if (currentUserRole.ordinal() < requiredUserRole.ordinal()) {
+        //    throw new ForbiddenException("User role required: " + requiredUserRole);
+        //}
+        //
+        authenticationService.clearCurrentUserData();
         return joinPoint.proceed();
     }
-
 }
+
+

@@ -1,5 +1,7 @@
 package com.delicacycomics.delicacy.service;
 
+import com.delicacycomics.delicacy.dto.request.AddProductDto;
+import com.delicacycomics.delicacy.dto.response.ProductDto;
 import com.delicacycomics.delicacy.entity.Product;
 import com.delicacycomics.delicacy.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +20,17 @@ public class ProductService {
     public Page<Product> getProducts(Pageable pageable) {
         return productRepository.findAll(pageable);
     }
+
+    @Transactional
+    public  Product getProductById(Long id) {
+        System.out.println("Count = " + productRepository.count());
+        return productRepository.findOne(id);
+    }
+
+    @Transactional
+    public  Product addProduct(Product product) {
+        return productRepository.save(product);
+    }
+
 
 }

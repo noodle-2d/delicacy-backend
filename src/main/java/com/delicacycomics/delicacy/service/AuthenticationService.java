@@ -1,7 +1,9 @@
 package com.delicacycomics.delicacy.service;
 
 import com.delicacycomics.delicacy.component.BCryptPasswordEncoder;
+import com.delicacycomics.delicacy.component.JwtFilter;
 import com.delicacycomics.delicacy.component.JwtGenerator;
+import com.delicacycomics.delicacy.dto.request.UserRegisterDto;
 import com.delicacycomics.delicacy.entity.User;
 import com.delicacycomics.delicacy.entity.UserData;
 import com.delicacycomics.delicacy.entity.UserRole;
@@ -16,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import static com.delicacycomics.delicacy.entity.UserRole.*;
@@ -36,11 +39,15 @@ public class AuthenticationService {
 
     public UserData getCurrentUserData() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null) {
+        if (authentication != null && authentication instanceof JwtFilter.JwtAuthentication) {
             return (UserData)authentication.getPrincipal();
         } else {
             return null;
         }
+    }
+
+    public void clearCurrentUserData() {
+        SecurityContextHolder.clearContext();
     }
 
     @Transactional
@@ -81,17 +88,23 @@ public class AuthenticationService {
     }
 
     @Transactional
-    public void register(String login, String password) {
-        User user = userRepository.findByLogin(login);
+    public void register(UserRegisterDto userRegisterDto) {
+        User user = userRepository.findByLogin(userRegisterDto.getLogin());
         if (user != null) {
             throw new ForbiddenException("User with the given login already exists");
         }
-        String passwordHash = passwordEncoder.encodePassword(password);
+        String passwordHash = passwordEncoder.encodePassword(userRegisterDto.getPassword());
         user = new User();
-        user.setLogin(login);
+        user.setLogin(userRegisterDto.getLogin());
         user.setPasswordHash(passwordHash);
         user.setStatus(ACTIVE);
         user.setRole(CUSTOMER);
+        user.setRegistrationDate(new Date());
+        user.setName(userRegisterDto.getName());
+        user.setSurname(userRegisterDto.getSurname());
+        user.setPhoneNumber(userRegisterDto.getPhoneNumber());
+        user.setEmail(userRegisterDto.getEmail());
+        user.setLink(userRegisterDto.getLink());
         userRepository.save(user);
     }
 

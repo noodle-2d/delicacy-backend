@@ -1,8 +1,12 @@
 package com.delicacycomics.delicacy.dto.request;
 
-public class LoginRequestDto {
+import javax.validation.constraints.NotNull;
 
+public class LoginSignInDto {
+
+    @NotNull
     private String login;
+    @NotNull
     private String password;
 
     public String getLogin() {
